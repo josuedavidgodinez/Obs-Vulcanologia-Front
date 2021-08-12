@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { InicioRoutingModule } from './inicio-routing.module';
 import { InicioComponent } from './inicio.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { InicioComponent } from './inicio.component';
   ],
   imports: [
     CommonModule,
-    InicioRoutingModule
+    InicioRoutingModule,
+    HighchartsChartModule
   ]
 })
 export class InicioModule { }

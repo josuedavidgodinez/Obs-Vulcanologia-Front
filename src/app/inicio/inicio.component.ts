@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'app-inicio',
@@ -10,6 +11,13 @@ export class InicioComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+  }
+
+  graficar(){
+
+
+
   }
 
 }
