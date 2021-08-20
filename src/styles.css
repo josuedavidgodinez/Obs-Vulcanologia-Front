@@ -1,3 +1,12 @@
 .bg-primary {
   background-color: #003863 !important;
 }
+
+.content {
+  max-width: 80%;
+  margin: auto;
+}
+
+.center-menu{
+  padding-left: 15%;
+}

@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Obs-Vulcanologia-Front';
+  title = 'Incyt - Instituto de Investigación y  Proyección sobre Ciencia y Tecnología';
 }
