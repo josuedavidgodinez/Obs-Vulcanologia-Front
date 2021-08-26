@@ -1,17 +1,18 @@
 <p>grafica-diaria works!</p>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- JS library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+<input size="16" type="text" class="form-control" id="datetime" readonly>
+    <script type="text/javascript">
+    $("#datetime").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        autoclose: true,
+        todayBtn: true
+    });
+    </script>
 
-<script>
-    $(document).ready(function(){
-        var date_input=$('input[name="Fecha"]');
-        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-        date_input.datepicker({
-            format: 'HH:mm:ss',
-            container: container,
-            todayHighlight: true,
-            autoclose: true,
-        })
-    })
-</script>
