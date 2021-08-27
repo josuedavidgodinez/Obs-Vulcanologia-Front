@@ -1,37 +1,19 @@
-<p>grafica-diaria works!</p>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="container">
   <div class="row my-4">
     <div class="col">
       <div class="jumbotron">
-        <h2>Fecha y hora</h2>
-        <label>Ingrese fecha y hora</label>
         <div class="input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text"><i class="material-icons">evento</i></span>
+            <div [formGroup]="formGroup">
+              <mat-form-field>
+                <input matInput [ngxMatDatetimePicker]="datepicker" placeholder="Seleccionar fecha y hora" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #datepicker></ngx-mat-datetime-picker>
+              </mat-form-field>
+            </div>
           </div>
-          <input class="form-control" id="datetimepicker" type="text" placeholder="Choose time">
         </div>
+      </div>
     </div>
+  </div>
 </div>
-</div>
-<script>
-  $(function() {
-    //Variables
-  var $now = moment();
-  var $dateMin = $now.subtract(3, 'days');
-  $('#datetimepicker').bootstrapMaterialDatePicker({
-    format: 'MM/DD/YYYY HH:mm',
-    shortTime: false,
-    date: true,
-    time: true,
-    monthPicker: false,
-    year: true,
-    clearButton: false,
-    nowButton: false,
-    switchOnClick: true,
-    cancelText: 'Cancel',
-  });
-});
-</script>
