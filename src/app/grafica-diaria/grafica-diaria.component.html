@@ -1,20 +1,35 @@
-<div class="content">
 <p>grafica-diaria works!</p>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container">
+  <div class="row my-4">
+    <div class="col">
+      <div class="jumbotron">
+        <h2>Fecha y hora</h2>
+        <label>Ingrese fecha y hora</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="material-icons">event</i></span>
+          </div>
+          <input class="form-control" id="datetimepicker" type="text" placeholder="Choose time">
+        </div>
+    </div>
 </div>
-=======
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- JS library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Bootstrap JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <script src="js/bootstrap-datetimepicker.min.js"></script>
-<input size="16" type="text" class="form-control" id="datetime" readonly>
-    <script type="text/javascript">
-    $("#datetime").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
-        autoclose: true,
-        todayBtn: true
-    });
-    </script>
+</div>
+<script>
+    $(function() {
+  var $now = moment();
+  var $dateMin = $now.subtract(3, 'days');
+  $('#datetimepicker').bootstrapMaterialDatePicker({
+    format: 'MM/DD/YYYY HH:mm',
+    shortTime: false,
+    date: true,
+    time: true,
+    monthPicker: false,
+    year: true,
+    clearButton: false,
+    nowButton: false,
+    switchOnClick: true,
+    cancelText: 'Cancel',
+  });
+</script>
