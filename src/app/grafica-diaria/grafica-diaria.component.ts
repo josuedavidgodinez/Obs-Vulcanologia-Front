@@ -13,3 +13,9 @@ export class GraficaDiariaComponent implements OnInit {
   }
 
 }
+
+@Component({
+  selector: 'datepicker-overview-example',
+  templateUrl: 'datepicker-overview-example.html',
+})
+export class DatepickerOverviewExample {}
