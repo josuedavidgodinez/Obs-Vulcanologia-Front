@@ -20,3 +20,5 @@ export class GraficaDiariaComponent implements OnInit {
   ngOnInit(): void {}
 
 }
+
+
