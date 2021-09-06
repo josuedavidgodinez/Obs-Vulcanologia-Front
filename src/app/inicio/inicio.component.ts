@@ -1,3 +1,4 @@
+import { GraficasInicioService } from './../services/GraficasInicio/graficas-inicio.service';
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts/highstock';
 
@@ -198,22 +199,22 @@ export class InicioComponent implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor(private graficasInicioService: GraficasInicioService) {}
 
   async ngOnInit() {
-    const result = await fetch(
-      'https://demo-live-data.highcharts.com/time-rows.json'
-    );
-    if (result.ok) {
-      const res = await result.json();
-      this.data = this.data.concat(res);
-      this.Highcharts.charts.forEach(chart => {
-       
-        chart.series[0].setData(this.data);
-      });
-      console.log('Data', this.data);
-    }
-    this.requestData();
+    this.graficasInicioService.GetData('','').subscribe((res) => {
+      if (res) {
+        console.log(res);
+        this.data = this.data.concat(res);
+        /*this.Highcharts.charts.forEach(chart => {
+         
+          chart.series[0].setData(this.data);
+        });*/
+        console.log('Data', this.data);
+      }
+    });;
+    
+    //this.requestData();
   }
 
   /**

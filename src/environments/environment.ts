@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  server: ""
+  server: "http://54.90.91.64:3300"
 };
 
 /*
