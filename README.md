@@ -4,4 +4,4 @@ Página del Incyt de la Universidad Rafael Landívar para ver actividad vulcanol
 
 ## Rama main
 
-Esta rama servirá de producción para publicar a los servidores correspondientes donde se alojara la página web.
+Esta rama servirá de desarrollo para todas las características de la página WEB.

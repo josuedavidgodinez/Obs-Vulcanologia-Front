@@ -1,1 +1,25 @@
-<p>inicio works!</p>
+<div class="content">
+  <highcharts-chart
+    style="width: 100%; display: block"
+    [Highcharts]="Highcharts"
+    [constructorType]="'stockChart'"
+    [options]="chartOptionsEstacion1"
+  >
+  </highcharts-chart>
+
+  <highcharts-chart
+    style="width: 100%; display: block"
+    [Highcharts]="Highcharts"
+    [constructorType]="'stockChart'"
+    [options]="chartOptionsEstacion2"
+  >
+  </highcharts-chart>
+
+  <highcharts-chart
+    style="width: 100%; display: block"
+    [Highcharts]="Highcharts"
+    [constructorType]="'stockChart'"
+    [options]="chartOptionsEstacion3"
+  >
+  </highcharts-chart>
+</div>
