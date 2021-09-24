@@ -1,3 +1,4 @@
+import { GraficaDiariaService } from './../services/GraficaDiaria/grafica-diaria.service';
 import { NgxMatDateAdapter, NgxMatDateFormats, NGX_MAT_DATE_FORMATS } from '@angular-material-components/datetime-picker';
 import { HttpClient } from '@angular/common/http';
 import { Component, NgModule, NgZone, OnInit } from '@angular/core';
@@ -11,16 +12,36 @@ import { MAT_DATE_LOCALE, ThemePalette } from '@angular/material/core';
 })
 export class GraficaDiariaComponent implements OnInit {
 
+  imagen: any;
+
   public formGroup = new FormGroup({
     date: new FormControl(null, [Validators.required]),
     date2: new FormControl(null, [Validators.required])
   })
 
-  constructor() { }
+  constructor(private graficaDiariaService: GraficaDiariaService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.graficaDiariaService.GetData(true).subscribe(res => {
+      this.createImageFromBlob(res);
+    })
+  }
+
+  
+
+createImageFromBlob(image: Blob) {
+       let reader = new FileReader();
+       reader.addEventListener("load", () => {
+          this.imagen = reader.result;
+       }, false);
+
+       if (image) {
+          reader.readAsDataURL(image);
+       }
+}
 
 }
+
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
