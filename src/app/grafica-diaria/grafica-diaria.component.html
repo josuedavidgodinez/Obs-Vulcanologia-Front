@@ -6,23 +6,21 @@
           <div class="input-group-prepend">
             <div [formGroup]="formGroup">
               <div class="row">
-                <div class="col-sm">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccionar Estación</option>
-                    <option value="1">Estación 1</option>
-                    <option value="2">Estación 2</option>
-                    <option value="3">Estación 3</option>
-                  </select>
-                </div>
-                <div class="col-sm">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccionar Sensor</option>
-                    <option value="1">Sensor 1</option>
-                    <option value="1">Sensor 2</option>
-                    <option value="1">Sensor 3</option>
-                    <option value="1">Sensor 4</option>
-                  </select>
-                </div>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Seleccionar Estación</option>
+                  <option value="1">Estación 1</option>
+                  <option value="2">Estación 2</option>
+                  <option value="3">Estación 3</option>
+                </select>
+                <span style="padding-left:20px"></span>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Seleccionar Sensor</option>
+                  <option value="1">Sensor 1</option>
+                  <option value="2">Sensor 2</option>
+                  <option value="3">Sensor 3</option>
+                  <option value="4">Sensor 4</option>
+                </select>
+                <span style="padding-left:20px"></span>
                 <mat-form-field>
                   <input matInput [ngxMatDatetimePicker]="datepicker" placeholder="Seleccionar fecha y hora"
                     formControlName="date">
