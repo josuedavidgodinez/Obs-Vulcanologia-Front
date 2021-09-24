@@ -11,11 +11,25 @@ export class GraficasInicioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  GetData(fechaInicio: any, fechaFin: any): Observable<any> {
+  GetDataIse1(): Observable<any> {
     let params = new HttpParams();
-    params = params.append('fhi','202008050000');
-    params = params.append('fhf', '202008050001');
-    return this.httpClient.get(`${environment.server}/med/ise1`, {params: params}).pipe(catchError(this.clientError));
+    //params = params.append('fhi',fechaInicio);
+    //params = params.append('fhf', fechaFin);
+    return this.httpClient.get(`${environment.server}/med/ise1/LecturaInicio`).pipe(catchError(this.clientError));
+  }
+
+  GetDataIse2(): Observable<any> {
+    let params = new HttpParams();
+    //params = params.append('fhi',fechaInicio);
+    //params = params.append('fhf', fechaFin);
+    return this.httpClient.get(`${environment.server}/med/ise2/LecturaInicio`).pipe(catchError(this.clientError));
+  }
+  
+  GetDataE1ms1(): Observable<any> {
+    let params = new HttpParams();
+    //params = params.append('fhi',fechaInicio);
+    //params = params.append('fhf', fechaFin);
+    return this.httpClient.get(`${environment.server}/med/e1ms1/LecturaInicio`).pipe(catchError(this.clientError));
   }
 
   clientError(error: HttpErrorResponse) {
