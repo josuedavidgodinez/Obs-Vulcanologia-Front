@@ -6,14 +6,14 @@
           <div class="input-group-prepend">
             <div [formGroup]="formGroup">
               <div class="row">
-                <select class="form-select" aria-label="Default select example">
+                <select (change)="selectChangeHandler1($event)">
                   <option selected>Seleccionar Estación</option>
                   <option value="1">Estación 1</option>
                   <option value="2">Estación 2</option>
                   <option value="3">Estación 3</option>
                 </select>
                 <span style="padding-left:20px"></span>
-                <select class="form-select" aria-label="Default select example">
+                <select (change)="selectChangeHandler2($event)">
                   <option selected>Seleccionar Sensor</option>
                   <option value="1">Sensor 1</option>
                   <option value="2">Sensor 2</option>
@@ -23,7 +23,7 @@
                 <span style="padding-left:20px"></span>
                 <mat-form-field>
                   <input matInput [ngxMatDatetimePicker]="datepicker" placeholder="Seleccionar fecha y hora"
-                    formControlName="date">
+                    formControlName="date" (ngModelChange)="selectChangeHandler3($event)">
                   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                   <ngx-mat-datetime-picker #datepicker></ngx-mat-datetime-picker>
                 </mat-form-field>
