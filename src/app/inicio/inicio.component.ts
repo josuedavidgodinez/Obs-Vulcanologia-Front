@@ -240,8 +240,12 @@ export class InicioComponent implements OnInit {
 
   constructor(private graficasInicioService: GraficasInicioService) {}
 
+  ngOnDestroy() {
+    delete this.Highcharts;
+  }
+
   async ngOnInit() {
-    
+  
     this.graficasInicioService.GetDataIse1().subscribe((res) => {
       if (res) {
         //console.log(res)
@@ -254,7 +258,7 @@ export class InicioComponent implements OnInit {
           
         });
         //console.log('Data', this.data);
-          
+          console.log(this.Highcharts.charts)
           this.Highcharts.charts[0].series[0].setData(this.dataIse1[0]);
           this.Highcharts.charts[0].series[1].setData(this.dataIse1[1]);
           this.Highcharts.charts[0].series[2].setData(this.dataIse1[2]);
