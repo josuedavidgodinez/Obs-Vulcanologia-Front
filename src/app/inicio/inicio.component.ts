@@ -249,15 +249,19 @@ export class InicioComponent implements OnInit {
     this.graficasInicioService.GetDataIse1().subscribe((res) => {
       if (res) {
         //console.log(res)
-        res.data.forEach((elemento) => {
-          elemento.sensores.map((e, i) => {
-            var myDate = new Date(elemento.fecha);
-            var result = myDate.getTime();
-            this.dataIse1[i].push([result, e]);
-          })
+        let fechas = res.data.fechas;
+        let sensores = res.data.sensores;
+        fechas.forEach((elemento, i) => {
+            sensores.forEach((element, j) => {
+              var myDate = new Date(elemento.fecha);
+              var result = myDate.getTime();
+              this.dataIse1[j].push([result, element.mediciones[i]]);
+            });
+            
+          
           
         });
-        //console.log('Data', this.data);
+        //console.log('Data', this.dataIse1);
           console.log(this.Highcharts.charts)
           this.Highcharts.charts[0].series[0].setData(this.dataIse1[0]);
           this.Highcharts.charts[0].series[1].setData(this.dataIse1[1]);
@@ -271,12 +275,16 @@ export class InicioComponent implements OnInit {
     this.graficasInicioService.GetDataIse2().subscribe((res) => {
       if (res) {
         //console.log(res)
-        res.data.forEach((elemento) => {
-          elemento.sensores.map((e, i) => {
-            var myDate = new Date(elemento.fecha);
-            var result = myDate.getTime();
-            this.dataIse2[i].push([result, e]);
-          })
+        let fechas = res.data.fechas;
+        let sensores = res.data.sensores;
+        fechas.forEach((elemento, i) => {
+            sensores.forEach((element, j) => {
+              var myDate = new Date(elemento.fecha);
+              var result = myDate.getTime();
+              this.dataIse1[j].push([result, element.mediciones[i]]);
+            });
+            
+          
           
         });
         //console.log('Data', this.data);
@@ -293,13 +301,16 @@ export class InicioComponent implements OnInit {
 
     this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
       if (res) {
-        console.log(res)
-        res.data.forEach((elemento) => {
-          elemento.sensores.map((e, i) => {
-            var myDate = new Date(elemento.fecha);
-            var result = myDate.getTime();
-            this.dataE1ms1[i].push([result, e]);
-          })
+        let fechas = res.data.fechas;
+        let sensores = res.data.sensores;
+        fechas.forEach((elemento, i) => {
+            sensores.forEach((element, j) => {
+              var myDate = new Date(elemento.fecha);
+              var result = myDate.getTime();
+              this.dataIse1[j].push([result, element.mediciones[i]]);
+            });
+            
+          
           
         });
         //console.log('Data', this.data);
