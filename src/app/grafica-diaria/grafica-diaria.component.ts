@@ -15,28 +15,38 @@ export class GraficaDiariaComponent implements OnInit {
 
   imagen: any;
 
-  selectedEstacion: string = '';
-  selectedSensor: string = '';
-  selectedDateTime: Date;
+  selectedEstacion: string = 'ise1';
+  selectedSensor: string = "1";
+  selectedDateTime_i: Date;
+  selectedDateTime_f: Date;
 
   selectChangeHandler1 (event: any) {
     //update the ui
     this.selectedEstacion = event.target.value;
     console.log(this.selectedEstacion)
+    this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
+      this.createImageFromBlob(res);
+      console.log(res)
+    })
   }
 
   selectChangeHandler2 (event: any) {
     //update the ui
     this.selectedSensor = event.target.value;
     console.log(this.selectedSensor)
+    this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
+      this.createImageFromBlob(res);
+      console.log(res)
+    })
   }
 
   selectChangeHandler3 (event: any) {
     //update the ui
-    this.selectedDateTime = event;
-    console.log(this.selectedDateTime)
-    this.graficaDiariaService.GetData(true).subscribe(res => {
+    this.selectedDateTime_i = event;
+    console.log(this.selectedDateTime_i)
+    this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
       this.createImageFromBlob(res);
+      console.log(res)
     })
   }
 
