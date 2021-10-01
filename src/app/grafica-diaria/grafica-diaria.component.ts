@@ -43,22 +43,41 @@ export class GraficaDiariaComponent implements OnInit {
   selectChangeHandler3 (event: any) {
     //update the ui
     this.selectedDateTime_i = event;
-    console.log(this.selectedDateTime_i)
-    this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
+    if(!(this.selectedDateTime_i && this.selectedDateTime_f)){
+
+      //console.log("undefined")
+    }
+    else{
+
+      this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
       this.createImageFromBlob(res);
       console.log(res)
     })
+    }
+  }
+
+   selectChangeHandler4 (event: any) {
+    //update the ui
+    this.selectedDateTime_f = event;
+    if(!(this.selectedDateTime_i && this.selectedDateTime_f)){
+      //console.log("undefined")
+    }else{
+      this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
+      this.createImageFromBlob(res);
+      console.log(res)
+      })
+    }
   }
 
   public formGroup = new FormGroup({
-    date: new FormControl(null, [Validators.required]),
-    date2: new FormControl(null, [Validators.required])
+    date_inicio: new FormControl(null, [Validators.required]),
+    date_fin: new FormControl(null, [Validators.required])
   })
 
   constructor(private graficaDiariaService: GraficaDiariaService) { }
 
   ngOnInit(): void {
-    this.graficaDiariaService.GetData(this.selectedEstacion).subscribe(res => {
+    this.graficaDiariaService.GetData(true).subscribe(res => {
       this.createImageFromBlob(res);
     })
   }
@@ -81,13 +100,13 @@ createImageFromBlob(image: Blob) {
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
-    dateInput: 'l, LTS'
+    dateInput: "l, LTS"
   },
   display: {
-    dateInput: 'YYYY-MM-DD HH:mm:ss',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
+    dateInput: "l, LTS",
+    monthYearLabel: "MMM YYYY",
+    dateA11yLabel: "LL",
+    monthYearA11yLabel: "MMMM YYYY"
   }
 };
 

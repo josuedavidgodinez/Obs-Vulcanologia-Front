@@ -21,10 +21,17 @@
                 </select>
                 <span style="padding-left:20px"></span>
                 <mat-form-field>
-                  <input matInput [ngxMatDatetimePicker]="datepicker" placeholder="Seleccionar fecha y hora"
-                    formControlName="date" (ngModelChange)="selectChangeHandler3($event)">
+                  <input matInput [ngxMatDatetimePicker]="datepicker" placeholder="Seleccionar fecha inicio y hora"
+                    formControlName="date_inicio" (ngModelChange)="selectChangeHandler3($event)">
                   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                   <ngx-mat-datetime-picker #datepicker></ngx-mat-datetime-picker>
+                </mat-form-field>
+                <span style="padding-left:20px"></span>
+                <mat-form-field>
+                  <input matInput [ngxMatDatetimePicker]="datepicker2" placeholder="Seleccionar fecha fin y hora"
+                    formControlName="date_fin" (ngModelChange)="selectChangeHandler4($event)">
+                  <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker #datepicker2></ngx-mat-datetime-picker>
                 </mat-form-field>
               </div>
             </div>
