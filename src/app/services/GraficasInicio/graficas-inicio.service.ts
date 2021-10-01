@@ -12,24 +12,37 @@ export class GraficasInicioService {
   constructor(private httpClient: HttpClient) { }
 
   GetDataIse1(): Observable<any> {
-    let params = new HttpParams();
-    //params = params.append('fhi',fechaInicio);
-    //params = params.append('fhf', fechaFin);
     return this.httpClient.get(`${environment.server}/med/ise1/LecturaInicio`).pipe(catchError(this.clientError));
   }
 
-  GetDataIse2(): Observable<any> {
+  GetDataIse1Fecha(fechaInicio, fechaFin): Observable<any> {
     let params = new HttpParams();
-    //params = params.append('fhi',fechaInicio);
-    //params = params.append('fhf', fechaFin);
+    params = params.append('fhi',fechaInicio);
+    params = params.append('fhf', fechaFin);
+    return this.httpClient.get(`${environment.server}/med/ise1/LecturaInicio`, {params}).pipe(catchError(this.clientError));
+  }
+
+  GetDataIse2(): Observable<any> {
     return this.httpClient.get(`${environment.server}/med/ise2/LecturaInicio`).pipe(catchError(this.clientError));
+  }
+
+  GetDataIse2Fecha(fechaInicio, fechaFin): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('fhi',fechaInicio);
+    params = params.append('fhf', fechaFin);
+    return this.httpClient.get(`${environment.server}/med/ise2/LecturaInicio`, {params}).pipe(catchError(this.clientError));
   }
   
   GetDataE1ms1(): Observable<any> {
-    let params = new HttpParams();
-    //params = params.append('fhi',fechaInicio);
-    //params = params.append('fhf', fechaFin);
+    console.log('entro en e1ms1')
     return this.httpClient.get(`${environment.server}/med/e1ms1/LecturaInicio`).pipe(catchError(this.clientError));
+  }
+
+  GetDataE1ms1Fecha(fechaInicio, fechaFin): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('fhi',fechaInicio);
+    params = params.append('fhf', fechaFin);
+    return this.httpClient.get(`${environment.server}/med/e1ms1/LecturaInicio`, {params}).pipe(catchError(this.clientError));
   }
 
   clientError(error: HttpErrorResponse) {
