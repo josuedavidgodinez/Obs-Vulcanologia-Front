@@ -23,48 +23,43 @@ export class GraficaDiariaComponent implements OnInit {
   selectChangeHandler1 (event: any) {
     //update the ui
     this.selectedEstacion = event.target.value;
-    console.log(this.selectedEstacion)
-    this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-      this.createImageFromBlob(res);
-      console.log(res)
-    })
+    if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
+      this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
+        this.createImageFromBlob(res);
+        console.log(res)
+      })
+    }
   }
 
   selectChangeHandler2 (event: any) {
     //update the ui
     this.selectedSensor = event.target.value;
-    console.log(this.selectedSensor)
-    this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-      this.createImageFromBlob(res);
-      console.log(res)
-    })
+    if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
+      this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
+        this.createImageFromBlob(res);
+        console.log(res)
+      })
+    }
   }
 
   selectChangeHandler3 (event: any) {
     //update the ui
     this.selectedDateTime_i = event;
-    if(!(this.selectedDateTime_i && this.selectedDateTime_f)){
-
-      //console.log("undefined")
-    }
-    else{
-
+    if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-      this.createImageFromBlob(res);
-      console.log(res)
-    })
+        this.createImageFromBlob(res);
+        console.log(res)
+      })
     }
   }
 
    selectChangeHandler4 (event: any) {
     //update the ui
     this.selectedDateTime_f = event;
-    if(!(this.selectedDateTime_i && this.selectedDateTime_f)){
-      //console.log("undefined")
-    }else{
+    if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-      this.createImageFromBlob(res);
-      console.log(res)
+        this.createImageFromBlob(res);
+        console.log(res)
       })
     }
   }
