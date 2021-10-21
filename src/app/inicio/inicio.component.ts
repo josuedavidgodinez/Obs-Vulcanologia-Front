@@ -15,6 +15,8 @@ export class InicioComponent implements OnInit {
   dataIse1 = [[],[],[],[]];
   dataIse2 = [[],[],[],[]];
   dataE1ms1 = [[],[],[],[]];
+  myTimer: any;
+  timerOn = true;
   fechas = [];
 
   chartOptionsEstacion1 = {
@@ -33,6 +35,10 @@ export class InicioComponent implements OnInit {
 
     xAxis: {
       categories: this.fechas
+    },
+
+    credits: {
+      enabled: false
     },
 
     yAxis: [
@@ -113,6 +119,10 @@ export class InicioComponent implements OnInit {
       text: 'Estación ISE2_INFRA',
     },
 
+    credits: {
+      enabled: false
+    },
+
     yAxis: [
       {
         labels: {
@@ -186,6 +196,10 @@ export class InicioComponent implements OnInit {
 
     title: {
       text: 'Estación E1MS1',
+    },
+
+    credits: {
+      enabled: false
     },
 
     yAxis: [
@@ -342,18 +356,39 @@ export class InicioComponent implements OnInit {
       }
     });
     
-    this.requestData();
+    this.myTimer = setInterval(() => this.requestData(), 1000);
+  }
+
+  toggleTimer() {
+    if (this.timerOn) {
+      this.disabledInter();
+    } else {
+      this.enableInter();
+    }
+  }
+
+  enableInter() {
+    console.log('enableInter')
+    this.timerOn = true;
+    this.myTimer = setInterval(() => this.requestData(), 1000);
+  }
+
+// clear setInterval
+  disabledInter() {
+    this.timerOn = false;
+    console.log('DisableInter')
+    clearTimeout(this.myTimer);
   }
 
   /**
    * Request data from the server, add it to the graph and set a timeout to request again
    */
-  async requestData() {
-    setInterval(async () => {
-
-      var fechaEnMiliseg = Date.now();
+  requestData() {
+      let fechaEnMiliseg = Date.now();
+      let fechaEnMilisegAnterior = fechaEnMiliseg - 8640000000
       
       console.log(fechaEnMiliseg);
+      console.log(fechaEnMilisegAnterior);
 
       /*this.graficasInicioService.GetDataIse1Fecha().subscribe((res) => {
         if (res) {
@@ -448,6 +483,5 @@ export class InicioComponent implements OnInit {
           //console.log('Data', this.data);
         }
       });*/
-    }, 100000);
   }
 }
