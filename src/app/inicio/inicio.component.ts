@@ -18,6 +18,18 @@ export class InicioComponent implements OnInit {
   myTimer: any;
   timerOn = true;
   fechas = [];
+  imagen: any;
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+       this.imagen = reader.result;
+    }, false);
+
+    if (image) {
+       reader.readAsDataURL(image);
+    }
+  }
 
   chartOptionsEstacion1 = {
     plotOptions: {
@@ -274,7 +286,11 @@ export class InicioComponent implements OnInit {
   }
 
   async ngOnInit() {
-  
+
+    this.graficasInicioService.GetImage(true).subscribe(res => {
+      this.createImageFromBlob(res);
+    })
+
     this.graficasInicioService.GetDataIse1().subscribe((res) => {
       if (res) {
         console.log(res)
@@ -287,9 +303,9 @@ export class InicioComponent implements OnInit {
               var result = myDate.getTime();
               this.dataIse1[j].push([result, element.mediciones[i]]);
             });
-            
-          
-          
+
+
+
         });
         console.log('Data', this.dataIse1);
           console.log(this.Highcharts.charts)
@@ -313,12 +329,12 @@ export class InicioComponent implements OnInit {
               var result = myDate.getTime();
               this.dataIse2[j].push([result, element.mediciones[i]]);
             });
-            
-          
-          
+
+
+
         });
         //console.log('Data', this.data);
-        
+
         console.log(this.Highcharts.charts)
         this.Highcharts.charts[1].series[0].setData(this.dataIse2[0]);
         this.Highcharts.charts[1].series[1].setData(this.dataIse2[1]);
@@ -339,14 +355,14 @@ export class InicioComponent implements OnInit {
               var result = myDate.getTime();
               this.dataE1ms1[j].push([result, element.mediciones[i]]);
             });
-            
-          
-          
+
+
+
         });
         console.log('Data', this.dataE1ms1);
         console.log(this.Highcharts.charts)
-        
-        
+
+
         this.Highcharts.charts[2].series[0].setData(this.dataE1ms1[0]);
         this.Highcharts.charts[2].series[1].setData(this.dataE1ms1[1]);
         this.Highcharts.charts[2].series[2].setData(this.dataE1ms1[2]);
@@ -355,8 +371,11 @@ export class InicioComponent implements OnInit {
         //console.log('Data', this.data);
       }
     });
-    
+
     this.myTimer = setInterval(() => this.requestData(), 1000);
+
+
+
   }
 
   toggleTimer() {
@@ -386,7 +405,7 @@ export class InicioComponent implements OnInit {
   requestData() {
       let fechaEnMiliseg = Date.now();
       let fechaEnMilisegAnterior = fechaEnMiliseg - 8640000000
-      
+
       console.log(fechaEnMiliseg);
       console.log(fechaEnMilisegAnterior);
 
@@ -401,9 +420,9 @@ export class InicioComponent implements OnInit {
                 var result = myDate.getTime();
                 this.dataIse1[j].push([result, element.mediciones[i]]);
               });
-              
-            
-            
+
+
+
           });
           if (this.dataIse1.length > 86400) {
             for (let index = 0; index < this.dataIse1.length - 86400; index++) {
@@ -420,7 +439,7 @@ export class InicioComponent implements OnInit {
           //console.log('Data', this.data);
         }
       });
-  
+
       this.graficasInicioService.GetDataIse2Fecha().subscribe((res) => {
         if (res) {
           //console.log(res)
@@ -432,9 +451,9 @@ export class InicioComponent implements OnInit {
                 var result = myDate.getTime();
                 this.dataIse1[j].push([result, element.mediciones[i]]);
               });
-              
-            
-            
+
+
+
           });
           //console.log('Data', this.data);
           if (this.dataIse1.length > 86400) {
@@ -442,7 +461,7 @@ export class InicioComponent implements OnInit {
               this.dataIse1.shift();
             }
           }
-          
+
           this.Highcharts.charts[1].series[0].setData(this.dataIse2[0], true);
           this.Highcharts.charts[1].series[1].setData(this.dataIse2[1], true);
           this.Highcharts.charts[1].series[2].setData(this.dataIse2[2], true);
@@ -463,18 +482,18 @@ export class InicioComponent implements OnInit {
                 var result = myDate.getTime();
                 this.dataIse1[j].push([result, element.mediciones[i]]);
               });
-              
-            
-            
+
+
+
           });
           //console.log('Data', this.data);
-          
+
           if (this.dataIse1.length > 86400) {
             for (let index = 0; index < this.dataIse1.length - 86400; index++) {
               this.dataIse1.shift();
             }
           }
-          
+
           this.Highcharts.charts[2].series[0].setData(this.dataE1ms1[0], true);
           this.Highcharts.charts[2].series[1].setData(this.dataE1ms1[1], true);
           this.Highcharts.charts[2].series[2].setData(this.dataE1ms1[2], true);

@@ -11,6 +11,10 @@ export class GraficasInicioService {
 
   constructor(private httpClient: HttpClient) { }
 
+  GetImage(formulario: any): Observable<any> {
+    return this.httpClient.get(`${environment.server}/media/lastPhoto`, { responseType: 'blob' }).pipe(catchError(this.clientError));
+  }
+
   GetDataIse1(): Observable<any> {
     return this.httpClient.get(`${environment.server}/med/ise1/LecturaInicio`).pipe(catchError(this.clientError));
   }
@@ -32,7 +36,7 @@ export class GraficasInicioService {
     params = params.append('fhf', fechaFin);
     return this.httpClient.get(`${environment.server}/med/ise2/LecturaInicio`, {params}).pipe(catchError(this.clientError));
   }
-  
+
   GetDataE1ms1(): Observable<any> {
     console.log('entro en e1ms1')
     return this.httpClient.get(`${environment.server}/med/e1ms1/LecturaInicio`).pipe(catchError(this.clientError));
