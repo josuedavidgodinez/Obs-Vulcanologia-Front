@@ -7,14 +7,11 @@ import * as Highcharts from 'highcharts/highstock';
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css'],
 })
-
-
-
 export class InicioComponent implements OnInit {
   Highcharts = Highcharts;
-  dataIse1 = [[],[],[],[]];
-  dataIse2 = [[],[],[],[]];
-  dataE1ms1 = [[],[],[],[]];
+  dataIse1 = [[], [], [], []];
+  dataIse2 = [[], [], [], []];
+  dataE1ms1 = [[], [], [], []];
   myTimer: any;
   timerOn = true;
   fechas = [];
@@ -22,8 +19,8 @@ export class InicioComponent implements OnInit {
   chartOptionsEstacion1 = {
     plotOptions: {
       series: {
-        turboThreshold: 0 // Comment out this code to display error
-      }
+        turboThreshold: 0, // Comment out this code to display error
+      },
     },
     rangeSelector: {
       selected: 0,
@@ -34,11 +31,11 @@ export class InicioComponent implements OnInit {
     },
 
     xAxis: {
-      categories: this.fechas
+      categories: this.fechas,
     },
 
     credits: {
-      enabled: false
+      enabled: false,
     },
 
     yAxis: [
@@ -108,8 +105,8 @@ export class InicioComponent implements OnInit {
   chartOptionsEstacion2 = {
     plotOptions: {
       series: {
-        turboThreshold: 0 // Comment out this code to display error
-      }
+        turboThreshold: 0, // Comment out this code to display error
+      },
     },
     rangeSelector: {
       selected: 1,
@@ -120,7 +117,7 @@ export class InicioComponent implements OnInit {
     },
 
     credits: {
-      enabled: false
+      enabled: false,
     },
 
     yAxis: [
@@ -187,8 +184,8 @@ export class InicioComponent implements OnInit {
   chartOptionsEstacion3 = {
     plotOptions: {
       series: {
-        turboThreshold: 0 // Comment out this code to display error
-      }
+        turboThreshold: 0, // Comment out this code to display error
+      },
     },
     rangeSelector: {
       selected: 1,
@@ -199,7 +196,7 @@ export class InicioComponent implements OnInit {
     },
 
     credits: {
-      enabled: false
+      enabled: false,
     },
 
     yAxis: [
@@ -274,89 +271,78 @@ export class InicioComponent implements OnInit {
   }
 
   async ngOnInit() {
-  
     this.graficasInicioService.GetDataIse1().subscribe((res) => {
       if (res) {
-        console.log(res)
+        console.log(res);
         let fechas = res.data.fechas;
         let sensores = res.data.sensores;
         fechas.forEach((elemento, i) => {
-            sensores.forEach((element, j) => {
-              //console.log(elemento)
-              var myDate = new Date(elemento);
-              var result = myDate.getTime();
-              this.dataIse1[j].push([result, element.mediciones[i]]);
-            });
-            
-          
-          
+          sensores.forEach((element, j) => {
+            //console.log(elemento)
+            var myDate = new Date(elemento);
+            var result = myDate.getTime();
+            this.dataIse1[j].push([result, element.mediciones[i]]);
+          });
         });
         console.log('Data', this.dataIse1);
-          console.log(this.Highcharts.charts)
-          this.Highcharts.charts[0].series[0].setData(this.dataIse1[0]);
-          this.Highcharts.charts[0].series[1].setData(this.dataIse1[1]);
-          this.Highcharts.charts[0].series[2].setData(this.dataIse1[2]);
-          this.Highcharts.charts[0].series[3].setData(this.dataIse1[3]);
-          this.Highcharts.charts[0].hideLoading();
+        console.log(this.Highcharts.charts);
+        this.Highcharts.charts[0].series[0].setData(this.dataIse1[0]);
+        this.Highcharts.charts[0].series[1].setData(this.dataIse1[1]);
+        this.Highcharts.charts[0].series[2].setData(this.dataIse1[2]);
+        this.Highcharts.charts[0].series[3].setData(this.dataIse1[3]);
+        this.Highcharts.charts[0].hideLoading();
         //console.log('Data', this.data);
-      }
-    });
 
-    this.graficasInicioService.GetDataIse2().subscribe((res) => {
-      if (res) {
-        console.log(res)
-        let fechas = res.data.fechas;
-        let sensores = res.data.sensores;
-        fechas.forEach((elemento, i) => {
-            sensores.forEach((element, j) => {
-              var myDate = new Date(elemento);
-              var result = myDate.getTime();
-              this.dataIse2[j].push([result, element.mediciones[i]]);
+        this.graficasInicioService.GetDataIse2().subscribe((res) => {
+          if (res) {
+            console.log(res);
+            let fechas = res.data.fechas;
+            let sensores = res.data.sensores;
+            fechas.forEach((elemento, i) => {
+              sensores.forEach((element, j) => {
+                var myDate = new Date(elemento);
+                var result = myDate.getTime();
+                this.dataIse2[j].push([result, element.mediciones[i]]);
+              });
             });
-            
-          
-          
-        });
-        //console.log('Data', this.data);
-        
-        console.log(this.Highcharts.charts)
-        this.Highcharts.charts[1].series[0].setData(this.dataIse2[0]);
-        this.Highcharts.charts[1].series[1].setData(this.dataIse2[1]);
-        this.Highcharts.charts[1].series[2].setData(this.dataIse2[2]);
-        this.Highcharts.charts[1].series[3].setData(this.dataIse2[3]);
-        this.Highcharts.charts[1].hideLoading();
-        //console.log('Data', this.data);
-      }
-    });
+            //console.log('Data', this.data);
 
-    this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
-      if (res) {
-        let fechas = res.data.fechas;
-        let sensores = res.data.sensores;
-        fechas.forEach((elemento, i) => {
-            sensores.forEach((element, j) => {
-              var myDate = new Date(elemento);
-              var result = myDate.getTime();
-              this.dataE1ms1[j].push([result, element.mediciones[i]]);
-            });
-            
-          
-          
+            console.log(this.Highcharts.charts);
+            this.Highcharts.charts[1].series[0].setData(this.dataIse2[0]);
+            this.Highcharts.charts[1].series[1].setData(this.dataIse2[1]);
+            this.Highcharts.charts[1].series[2].setData(this.dataIse2[2]);
+            this.Highcharts.charts[1].series[3].setData(this.dataIse2[3]);
+            this.Highcharts.charts[1].hideLoading();
+            //console.log('Data', this.data);
+
+            /*this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
+              if (res) {
+                let fechas = res.data.fechas;
+                let sensores = res.data.sensores;
+                fechas.forEach((elemento, i) => {
+                  sensores.forEach((element, j) => {
+                    var myDate = new Date(elemento);
+                    var result = myDate.getTime();
+                    this.dataE1ms1[j].push([result, element.mediciones[i]]);
+                  });
+                });
+                console.log('Data', this.dataE1ms1);
+                console.log(this.Highcharts.charts);
+
+                this.Highcharts.charts[2].series[0].setData(this.dataE1ms1[0]);
+                this.Highcharts.charts[2].series[1].setData(this.dataE1ms1[1]);
+                this.Highcharts.charts[2].series[2].setData(this.dataE1ms1[2]);
+                this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3]);
+                this.Highcharts.charts[2].hideLoading();
+                //console.log('Data', this.data);
+                
+              }
+            });*/
+          }
+          this.myTimer = setInterval(() => this.requestData(), 5000);
         });
-        console.log('Data', this.dataE1ms1);
-        console.log(this.Highcharts.charts)
-        
-        
-        this.Highcharts.charts[2].series[0].setData(this.dataE1ms1[0]);
-        this.Highcharts.charts[2].series[1].setData(this.dataE1ms1[1]);
-        this.Highcharts.charts[2].series[2].setData(this.dataE1ms1[2]);
-        this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3]);
-        this.Highcharts.charts[2].hideLoading();
-        //console.log('Data', this.data);
       }
     });
-    
-    this.myTimer = setInterval(() => this.requestData(), 1000);
   }
 
   toggleTimer() {
@@ -368,15 +354,15 @@ export class InicioComponent implements OnInit {
   }
 
   enableInter() {
-    console.log('enableInter')
+    console.log('enableInter');
     this.timerOn = true;
-    this.myTimer = setInterval(() => this.requestData(), 1000);
+    this.myTimer = setInterval(() => this.requestData(), 5000);
   }
 
-// clear setInterval
+  // clear setInterval
   disabledInter() {
     this.timerOn = false;
-    console.log('DisableInter')
+    console.log('DisableInter');
     clearTimeout(this.myTimer);
   }
 
@@ -384,57 +370,70 @@ export class InicioComponent implements OnInit {
    * Request data from the server, add it to the graph and set a timeout to request again
    */
   requestData() {
-      let fechaEnMiliseg = Date.now();
-      let fechaEnMilisegAnterior = fechaEnMiliseg - 8640000000
-      
-      console.log(fechaEnMiliseg);
-      console.log(fechaEnMilisegAnterior);
+    let fechaEnMiliseg = Date.now();
+    let fechaEnMilisegAnterior = fechaEnMiliseg - 300000;
 
-      /*this.graficasInicioService.GetDataIse1Fecha().subscribe((res) => {
+    console.log(fechaEnMiliseg);
+    console.log(fechaEnMilisegAnterior);
+
+    this.graficasInicioService
+      .GetDataIse1Fecha(fechaEnMilisegAnterior, fechaEnMiliseg)
+      .subscribe((res) => {
         if (res) {
           //console.log(res)
           let fechas = res.data.fechas;
           let sensores = res.data.sensores;
+
+          //console.log('Fechas nuevas: ',fechas)
+          //console.log('Sensores nuevas: ',sensores)
+
           fechas.forEach((elemento, i) => {
-              sensores.forEach((element, j) => {
-                var myDate = new Date(elemento.fecha);
-                var result = myDate.getTime();
-                this.dataIse1[j].push([result, element.mediciones[i]]);
-              });
-              
-            
-            
+            sensores.forEach((element, j) => {
+              var myDate = new Date(elemento);
+              var result = myDate.getTime();
+              //console.log('fecha',result)
+              this.dataIse1[j].push([result, element.mediciones[i]]);
+            });
           });
-          if (this.dataIse1.length > 86400) {
+          /*if (this.dataIse1.length > 86400) {
             for (let index = 0; index < this.dataIse1.length - 86400; index++) {
               this.dataIse1.shift();
             }
-          }
-          //console.log('Data', this.dataIse1);
-            console.log(this.Highcharts.charts)
-            this.Highcharts.charts[0].series[0].setData(this.dataIse1[0], true);
-            this.Highcharts.charts[0].series[1].setData(this.dataIse1[1], true);
-            this.Highcharts.charts[0].series[2].setData(this.dataIse1[2], true);
-            this.Highcharts.charts[0].series[3].setData(this.dataIse1[3], true);
-            this.Highcharts.charts[0].hideLoading();
+          }*/
+          console.log('Data request ise1', this.dataIse1);
+          console.log(this.Highcharts.charts);
+          const series = this.Highcharts.charts[0].series[0],
+          shift = series.data.length > 20; // shift if the series is longer than 20
+          const series2 = this.Highcharts.charts[0].series[1],
+          shift2 = series2.data.length > 20; // shift if the series is longer than 20
+          const series3 = this.Highcharts.charts[0].series[2],
+          shift3 = series3.data.length > 20; // shift if the series is longer than 20
+          const series4 = this.Highcharts.charts[0].series[3],
+          shift4 = series4.data.length > 20; // shift if the series is longer than 20
+
+        console.log('Data ise1', this.dataIse1);
+        this.Highcharts.charts[0].series[0].addPoint(this.dataIse1[0], true, shift);
+        this.Highcharts.charts[0].series[1].addPoint(this.dataIse1[1], true,shift2);
+        this.Highcharts.charts[0].series[2].addPoint(this.dataIse1[2], true,shift3);
+        this.Highcharts.charts[0].series[3].addPoint(this.dataIse1[3], true,shift4);
+          this.Highcharts.charts[0].hideLoading();
           //console.log('Data', this.data);
         }
       });
-  
-      this.graficasInicioService.GetDataIse2Fecha().subscribe((res) => {
+
+    /*this.graficasInicioService
+      .GetDataIse2Fecha(fechaEnMilisegAnterior, fechaEnMiliseg)
+      .subscribe((res) => {
         if (res) {
           //console.log(res)
           let fechas = res.data.fechas;
           let sensores = res.data.sensores;
           fechas.forEach((elemento, i) => {
-              sensores.forEach((element, j) => {
-                var myDate = new Date(elemento.fecha);
-                var result = myDate.getTime();
-                this.dataIse1[j].push([result, element.mediciones[i]]);
-              });
-              
-            
-            
+            sensores.forEach((element, j) => {
+              var myDate = new Date(elemento.fecha);
+              var result = myDate.getTime();
+              this.dataIse1[j].push([result, element.mediciones[i]]);
+            });
           });
           //console.log('Data', this.data);
           if (this.dataIse1.length > 86400) {
@@ -442,43 +441,50 @@ export class InicioComponent implements OnInit {
               this.dataIse1.shift();
             }
           }
-          
+          console.log('Data ise2', this.dataIse2);
           this.Highcharts.charts[1].series[0].setData(this.dataIse2[0], true);
           this.Highcharts.charts[1].series[1].setData(this.dataIse2[1], true);
           this.Highcharts.charts[1].series[2].setData(this.dataIse2[2], true);
           this.Highcharts.charts[1].series[3].setData(this.dataIse2[3], true);
           this.Highcharts.charts[1].hideLoading();
-          //console.log('Data', this.data);
         }
-      });
+      });*/
 
-
-      this.graficasInicioService.GetDataE1ms1Fecha().subscribe((res) => {
+    /*this.graficasInicioService
+      .GetDataE1ms1Fecha(fechaEnMilisegAnterior, fechaEnMiliseg)
+      .subscribe((res) => {
         if (res) {
           let fechas = res.data.fechas;
           let sensores = res.data.sensores;
           fechas.forEach((elemento, i) => {
-              sensores.forEach((element, j) => {
-                var myDate = new Date(elemento.fecha);
-                var result = myDate.getTime();
-                this.dataIse1[j].push([result, element.mediciones[i]]);
-              });
-              
-            
-            
+            sensores.forEach((element, j) => {
+              var myDate = new Date(elemento.fecha);
+              var result = myDate.getTime();
+              this.dataIse1[j].push([result, element.mediciones[i]]);
+            });
           });
           //console.log('Data', this.data);
-          
+
           if (this.dataIse1.length > 86400) {
             for (let index = 0; index < this.dataIse1.length - 86400; index++) {
               this.dataIse1.shift();
             }
           }
-          
-          this.Highcharts.charts[2].series[0].setData(this.dataE1ms1[0], true);
-          this.Highcharts.charts[2].series[1].setData(this.dataE1ms1[1], true);
-          this.Highcharts.charts[2].series[2].setData(this.dataE1ms1[2], true);
-          this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3], true);
+
+          const series = this.Highcharts.charts[2].series[0],
+            shift = series.data.length > 20; // shift if the series is longer than 20
+            const series2 = this.Highcharts.charts[2].series[0],
+            shift2 = series2.data.length > 20; // shift if the series is longer than 20
+            const series3 = this.Highcharts.charts[2].series[0],
+            shift3 = series3.data.length > 20; // shift if the series is longer than 20
+            const series4 = this.Highcharts.charts[2].series[0],
+            shift4 = series4.data.length > 20; // shift if the series is longer than 20
+
+          console.log('Data ise2', this.dataE1ms1);
+          this.Highcharts.charts[2].series[0].addPoint(this.dataIse1[0], true, shift);
+          this.Highcharts.charts[2].series[1].addPoint(this.dataIse1[1], true, shift2);
+          this.Highcharts.charts[2].series[2].addPoint(this.dataIse1[2], true, shift3);
+          this.Highcharts.charts[2].series[3].addPoint(this.dataIse1[3], true, shift4);
           this.Highcharts.charts[2].hideLoading();
           //console.log('Data', this.data);
         }
