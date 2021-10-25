@@ -1,3 +1,48 @@
-<div class="content">
-  <p>espectrograma works!</p>
+<div class="container">
+  <div class="row my-4">
+    <div class="col">
+      <div class="jumbotron">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div [formGroup]="formGroup">
+              <div class="row">
+                <select (change)="selectChangeHandler1($event)">
+                  <option selected>Seleccionar Estación</option>
+                  <option value="ise1">Estación 1</option>
+                  <option value="ise2">Estación 2</option>
+                  <option value="e1ms1">Estación 3</option>
+                </select>
+                <span style="padding-left:20px"></span>
+                <select (change)="selectChangeHandler2($event)">
+                  <option selected>Seleccionar Sensor</option>
+                  <option value="1">Sensor 1</option>
+                  <option value="2">Sensor 2</option>
+                  <option value="3">Sensor 3</option>
+                </select>
+                <span style="padding-left:20px"></span>
+                <mat-form-field>
+                  <input matInput [ngxMatDatetimePicker]="datepicker" placeholder="Seleccionar fecha inicio y hora"
+                    formControlName="date_inicio" (ngModelChange)="selectChangeHandler3($event)">
+                  <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker #datepicker></ngx-mat-datetime-picker>
+                </mat-form-field>
+                <span style="padding-left:20px"></span>
+                <mat-form-field>
+                  <input matInput [ngxMatDatetimePicker]="datepicker2" placeholder="Seleccionar fecha fin y hora"
+                    formControlName="date_fin" (ngModelChange)="selectChangeHandler4($event)">
+                  <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker #datepicker2></ngx-mat-datetime-picker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row my-4">
+    <div class="col">
+      <img [src]="imagen" />
+    </div>
+  </div>
 </div>

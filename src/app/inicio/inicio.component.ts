@@ -15,6 +15,18 @@ export class InicioComponent implements OnInit {
   myTimer: any;
   timerOn = true;
   fechas = [];
+  imagen: any;
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+       this.imagen = reader.result;
+    }, false);
+
+    if (image) {
+       reader.readAsDataURL(image);
+    }
+  }
 
   chartOptionsEstacion1 = {
     plotOptions: {
@@ -271,6 +283,11 @@ export class InicioComponent implements OnInit {
   }
 
   async ngOnInit() {
+
+    this.graficasInicioService.GetImage(true).subscribe(res => {
+      this.createImageFromBlob(res);
+    })
+
     this.graficasInicioService.GetDataIse1().subscribe((res) => {
       if (res) {
         console.log(res);
