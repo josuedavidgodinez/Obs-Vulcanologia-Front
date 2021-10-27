@@ -1,7 +1,7 @@
 <div class="content">
-
-  <button *ngIf="timerOn; else elseBlock" (click)="toggleTimer()">Detener</button>
-  <ng-template #elseBlock><button (click)="toggleTimer()">Iniciar</button></ng-template>
+  <br>
+  <button id="btnParar" type="button" class="btn btn-danger invisible" *ngIf="timerOn; else elseBlock" (click)="toggleTimer()">Parar</button>
+  <ng-template #elseBlock><button id="btnIniciar" type="button" class="btn btn-success invisible" (click)="toggleTimer()">Iniciar</button></ng-template>
   <highcharts-chart
     style="width: 100%; display: block"
     [Highcharts]="Highcharts"

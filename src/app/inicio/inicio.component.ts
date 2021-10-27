@@ -16,6 +16,8 @@ export class InicioComponent implements OnInit {
   timerOn = true;
   fechas = [];
   imagen: any;
+  fechaEnMiliseg: any;
+  fechaEnMilisegAnterior: any
 
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
@@ -291,6 +293,9 @@ export class InicioComponent implements OnInit {
       this.createImageFromBlob(res);
     });
 
+  
+
+    this.fechaEnMiliseg = Date.now();
     this.graficasInicioService.GetDataIse1().subscribe((res) => {
       if (res) {
         console.log(res);
@@ -313,7 +318,7 @@ export class InicioComponent implements OnInit {
         this.Highcharts.charts[0].hideLoading();
         //console.log('Data', this.data);
 
-        /*this.graficasInicioService.GetDataIse2().subscribe((res) => {
+        this.graficasInicioService.GetDataIse2().subscribe((res) => {
           if (res) {
             console.log(res);
             let fechas = res.data.fechas;
@@ -335,7 +340,7 @@ export class InicioComponent implements OnInit {
             this.Highcharts.charts[1].hideLoading();
             //console.log('Data', this.data);
 
-            /*this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
+            this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
               if (res) {
                 let fechas = res.data.fechas;
                 let sensores = res.data.sensores;
@@ -355,14 +360,18 @@ export class InicioComponent implements OnInit {
                 this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3]);
                 this.Highcharts.charts[2].hideLoading();
                 //console.log('Data', this.data);
-                
+                this.myTimer = setInterval(() => this.requestData(), 5000);
+                document.getElementById("btnParar").classList.remove('invisible');
+                document.getElementById("btnIniciar").classList.remove('invisible');
+                document.getElementById("btnParar").classList.add('visible');
+                document.getElementById("btnIniciar").classList.add('visible');
               }
             });
           }
           
-        });*/
+        })
       }
-      this.myTimer = setInterval(() => this.requestData(), 5000);
+      
     });
   }
 
@@ -391,22 +400,23 @@ export class InicioComponent implements OnInit {
    * Request data from the server, add it to the graph and set a timeout to request again
    */
   requestData() {
-    let fechaEnMiliseg = Date.now();
-    let fechaEnMilisegAnterior = fechaEnMiliseg - 300000;
+    this.fechaEnMilisegAnterior = this.fechaEnMiliseg;
+    this.fechaEnMiliseg = Date.now();
+   
 
-    console.log(fechaEnMiliseg);
-    console.log(fechaEnMilisegAnterior);
+    //console.log(fechaEnMiliseg);
+    //console.log(fechaEnMilisegAnterior);
 
     this.graficasInicioService
-      .GetDataIse1Fecha(fechaEnMilisegAnterior, fechaEnMiliseg)
+      .GetDataIse1Fecha(this.fechaEnMilisegAnterior, this.fechaEnMiliseg)
       .subscribe((res) => {
         if (res) {
           //console.log(res)
           let fechas = res.data.fechas;
           let sensores = res.data.sensores;
 
-          console.log('Fechas nuevas: ', fechas);
-          console.log('Sensores nuevas: ', sensores);
+         // console.log('Fechas nuevas: ', fechas);
+         // console.log('Sensores nuevas: ', sensores);
 
           fechas.forEach((elemento, i) => {
             sensores.forEach((element, j) => {
@@ -416,37 +426,23 @@ export class InicioComponent implements OnInit {
               this.dataIse1[j].push([result, element.mediciones[i]]);
             });
           });
-          /*if (this.dataIse1.length > 86400) {
-            for (let index = 0; index < this.dataIse1.length - 86400; index++) {
-              this.dataIse1.shift();
-            }
-          }*/
-          /* console.log('Data request ise1', this.dataIse1);
-          console.log(this.Highcharts.charts);
-          const series = this.Highcharts.charts[0].series[0],
-          shift = series.data.length > 20; // shift if the series is longer than 20
-          const series2 = this.Highcharts.charts[0].series[1],
-          shift2 = series2.data.length > 20; // shift if the series is longer than 20
-          const series3 = this.Highcharts.charts[0].series[2],
-          shift3 = series3.data.length > 20; // shift if the series is longer than 20
-          const series4 = this.Highcharts.charts[0].series[3],
-          shift4 = series4.data.length > 20; // shift if the series is longer than 20*/
+      
           this.dataIse1[0].sort();
           this.dataIse1[1].sort();
           this.dataIse1[2].sort();
           this.dataIse1[3].sort();
-          console.log('Data ise1', this.dataIse1);
+          //console.log('Data ise1', this.dataIse1);
           this.Highcharts.charts[0].series[0].setData(this.dataIse1[0], true);
           this.Highcharts.charts[0].series[1].setData(this.dataIse1[1], true);
           this.Highcharts.charts[0].series[2].setData(this.dataIse1[2], true);
           this.Highcharts.charts[0].series[3].setData(this.dataIse1[3], true);
-          this.Highcharts.charts[0].hideLoading();
+          //this.Highcharts.charts[0].hideLoading();
           //console.log('Data', this.data);
         }
       });
 
-    /*this.graficasInicioService
-      .GetDataIse2Fecha(fechaEnMilisegAnterior, fechaEnMiliseg)
+    this.graficasInicioService
+      .GetDataIse2Fecha(this.fechaEnMilisegAnterior, this.fechaEnMiliseg)
       .subscribe((res) => {
         if (res) {
           //console.log(res)
@@ -454,64 +450,51 @@ export class InicioComponent implements OnInit {
           let sensores = res.data.sensores;
           fechas.forEach((elemento, i) => {
             sensores.forEach((element, j) => {
-              var myDate = new Date(elemento.fecha);
+              //console.log(elemento)
+              var myDate = new Date(elemento);
               var result = myDate.getTime();
-              this.dataIse1[j].push([result, element.mediciones[i]]);
+              this.dataIse2[j].push([result, element.mediciones[i]]);
             });
           });
-          //console.log('Data', this.data);
-          if (this.dataIse1.length > 86400) {
-            for (let index = 0; index < this.dataIse1.length - 86400; index++) {
-              this.dataIse1.shift();
-            }
-          }
-          console.log('Data ise2', this.dataIse2);
+      
+          this.dataIse2[0].sort();
+          this.dataIse2[1].sort();
+          this.dataIse2[2].sort();
+          this.dataIse2[3].sort();
+          //console.log('Data ise1', this.dataIse1);
           this.Highcharts.charts[1].series[0].setData(this.dataIse2[0], true);
           this.Highcharts.charts[1].series[1].setData(this.dataIse2[1], true);
           this.Highcharts.charts[1].series[2].setData(this.dataIse2[2], true);
           this.Highcharts.charts[1].series[3].setData(this.dataIse2[3], true);
-          this.Highcharts.charts[1].hideLoading();
         }
-      });*/
+      });
 
-    /*this.graficasInicioService
-      .GetDataE1ms1Fecha(fechaEnMilisegAnterior, fechaEnMiliseg)
+    this.graficasInicioService
+      .GetDataE1ms1Fecha(this.fechaEnMilisegAnterior, this.fechaEnMiliseg)
       .subscribe((res) => {
         if (res) {
           let fechas = res.data.fechas;
           let sensores = res.data.sensores;
           fechas.forEach((elemento, i) => {
             sensores.forEach((element, j) => {
-              var myDate = new Date(elemento.fecha);
+              //console.log(elemento)
+              var myDate = new Date(elemento);
               var result = myDate.getTime();
-              this.dataIse1[j].push([result, element.mediciones[i]]);
+              this.dataE1ms1[j].push([result, element.mediciones[i]]);
             });
           });
-          //console.log('Data', this.data);
-
-          if (this.dataIse1.length > 86400) {
-            for (let index = 0; index < this.dataIse1.length - 86400; index++) {
-              this.dataIse1.shift();
-            }
-          }
-
-          const series = this.Highcharts.charts[2].series[0],
-            shift = series.data.length > 20; // shift if the series is longer than 20
-            const series2 = this.Highcharts.charts[2].series[0],
-            shift2 = series2.data.length > 20; // shift if the series is longer than 20
-            const series3 = this.Highcharts.charts[2].series[0],
-            shift3 = series3.data.length > 20; // shift if the series is longer than 20
-            const series4 = this.Highcharts.charts[2].series[0],
-            shift4 = series4.data.length > 20; // shift if the series is longer than 20
-
-          console.log('Data ise2', this.dataE1ms1);
-          this.Highcharts.charts[2].series[0].addPoint(this.dataIse1[0], true, shift);
-          this.Highcharts.charts[2].series[1].addPoint(this.dataIse1[1], true, shift2);
-          this.Highcharts.charts[2].series[2].addPoint(this.dataIse1[2], true, shift3);
-          this.Highcharts.charts[2].series[3].addPoint(this.dataIse1[3], true, shift4);
-          this.Highcharts.charts[2].hideLoading();
+      
+          this.dataE1ms1[0].sort();
+          this.dataE1ms1[1].sort();
+          this.dataE1ms1[2].sort();
+          this.dataE1ms1[3].sort();
+          //console.log('Data ise1', this.dataIse1);
+          this.Highcharts.charts[2].series[0].setData(this.dataE1ms1[0], true);
+          this.Highcharts.charts[2].series[1].setData(this.dataE1ms1[1], true);
+          this.Highcharts.charts[2].series[2].setData(this.dataE1ms1[2], true);
+          this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3], true);
           //console.log('Data', this.data);
         }
-      });*/
+      });
   }
 }
