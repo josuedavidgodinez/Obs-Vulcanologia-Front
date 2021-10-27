@@ -19,12 +19,16 @@ export class InicioComponent implements OnInit {
 
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
-    reader.addEventListener("load", () => {
-       this.imagen = reader.result;
-    }, false);
+    reader.addEventListener(
+      'load',
+      () => {
+        this.imagen = reader.result;
+      },
+      false
+    );
 
     if (image) {
-       reader.readAsDataURL(image);
+      reader.readAsDataURL(image);
     }
   }
 
@@ -35,7 +39,7 @@ export class InicioComponent implements OnInit {
       },
     },
     rangeSelector: {
-      selected: 0,
+      enabled: false,
     },
 
     title: {
@@ -121,7 +125,7 @@ export class InicioComponent implements OnInit {
       },
     },
     rangeSelector: {
-      selected: 1,
+      enabled: false,
     },
 
     title: {
@@ -200,7 +204,7 @@ export class InicioComponent implements OnInit {
       },
     },
     rangeSelector: {
-      selected: 1,
+      enabled: false,
     },
 
     title: {
@@ -283,10 +287,9 @@ export class InicioComponent implements OnInit {
   }
 
   async ngOnInit() {
-
-    this.graficasInicioService.GetImage(true).subscribe(res => {
+    this.graficasInicioService.GetImage(true).subscribe((res) => {
       this.createImageFromBlob(res);
-    })
+    });
 
     this.graficasInicioService.GetDataIse1().subscribe((res) => {
       if (res) {
@@ -310,7 +313,7 @@ export class InicioComponent implements OnInit {
         this.Highcharts.charts[0].hideLoading();
         //console.log('Data', this.data);
 
-        this.graficasInicioService.GetDataIse2().subscribe((res) => {
+        /*this.graficasInicioService.GetDataIse2().subscribe((res) => {
           if (res) {
             console.log(res);
             let fechas = res.data.fechas;
@@ -354,11 +357,12 @@ export class InicioComponent implements OnInit {
                 //console.log('Data', this.data);
                 
               }
-            });*/
+            });
           }
-          this.myTimer = setInterval(() => this.requestData(), 5000);
-        });
+          
+        });*/
       }
+      this.myTimer = setInterval(() => this.requestData(), 5000);
     });
   }
 
@@ -401,14 +405,14 @@ export class InicioComponent implements OnInit {
           let fechas = res.data.fechas;
           let sensores = res.data.sensores;
 
-          //console.log('Fechas nuevas: ',fechas)
-          //console.log('Sensores nuevas: ',sensores)
+          console.log('Fechas nuevas: ', fechas);
+          console.log('Sensores nuevas: ', sensores);
 
           fechas.forEach((elemento, i) => {
             sensores.forEach((element, j) => {
+              //console.log(elemento)
               var myDate = new Date(elemento);
               var result = myDate.getTime();
-              //console.log('fecha',result)
               this.dataIse1[j].push([result, element.mediciones[i]]);
             });
           });
@@ -417,7 +421,7 @@ export class InicioComponent implements OnInit {
               this.dataIse1.shift();
             }
           }*/
-          console.log('Data request ise1', this.dataIse1);
+          /* console.log('Data request ise1', this.dataIse1);
           console.log(this.Highcharts.charts);
           const series = this.Highcharts.charts[0].series[0],
           shift = series.data.length > 20; // shift if the series is longer than 20
@@ -426,13 +430,16 @@ export class InicioComponent implements OnInit {
           const series3 = this.Highcharts.charts[0].series[2],
           shift3 = series3.data.length > 20; // shift if the series is longer than 20
           const series4 = this.Highcharts.charts[0].series[3],
-          shift4 = series4.data.length > 20; // shift if the series is longer than 20
-
-        console.log('Data ise1', this.dataIse1);
-        this.Highcharts.charts[0].series[0].addPoint(this.dataIse1[0], true, shift);
-        this.Highcharts.charts[0].series[1].addPoint(this.dataIse1[1], true,shift2);
-        this.Highcharts.charts[0].series[2].addPoint(this.dataIse1[2], true,shift3);
-        this.Highcharts.charts[0].series[3].addPoint(this.dataIse1[3], true,shift4);
+          shift4 = series4.data.length > 20; // shift if the series is longer than 20*/
+          this.dataIse1[0].sort();
+          this.dataIse1[1].sort();
+          this.dataIse1[2].sort();
+          this.dataIse1[3].sort();
+          console.log('Data ise1', this.dataIse1);
+          this.Highcharts.charts[0].series[0].setData(this.dataIse1[0], true);
+          this.Highcharts.charts[0].series[1].setData(this.dataIse1[1], true);
+          this.Highcharts.charts[0].series[2].setData(this.dataIse1[2], true);
+          this.Highcharts.charts[0].series[3].setData(this.dataIse1[3], true);
           this.Highcharts.charts[0].hideLoading();
           //console.log('Data', this.data);
         }
