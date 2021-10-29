@@ -42,7 +42,12 @@
   </div>
   <div class="row my-5">
     <div class="col">
-      <ngx-imageviewer [src]="images"></ngx-imageviewer>
+        <gallery id="basic-test" fluid [items]="items" [itemTemplate]="itemTemplate" [gestures]="false"></gallery>
     </div>
+    <ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+      <ng-container *ngIf="type === 'imageViewer' && index === currIndex">
+        <ngx-imageviewer [src]="data.src"></ngx-imageviewer>
+      </ng-container>
+    </ng-template>
   </div>
 </div>
