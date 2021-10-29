@@ -19,8 +19,8 @@ export class EspectogramaService {
   GetDataFecha(estacion:any,sensor:any,fecha_i:any,fecha_f:any): Observable<any> {
     fecha_i = this.ParsingDate(fecha_i);
     fecha_f = this.ParsingDate(fecha_f);
-    console.log(`${environment.server}/eg/`+estacion+`/`+sensor+`/espectrograma?fhi=`+fecha_i+`&fhf=`+fecha_f);
-    return this.httpClient.get(`${environment.server}/eg/`+estacion+`/`+sensor+`/espectrograma?fhi=`+fecha_i+`&fhf=`+fecha_f, { responseType: 'blob' }).pipe(catchError(this.clientError));
+    console.log(`${environment.server}/media/`+estacion+`/`+sensor+`/espectrograma?fhi=`+fecha_i+`&fhf=`+fecha_f);
+    return this.httpClient.get(`${environment.server}/media/`+estacion+`/`+sensor+`/espectrograma?fhi=`+fecha_i+`&fhf=`+fecha_f, { responseType: 'blob' }).pipe(catchError(this.clientError));
   }
 
   ParsingDate(fecha:Date){
