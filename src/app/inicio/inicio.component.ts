@@ -17,7 +17,7 @@ export class InicioComponent implements OnInit {
   fechas = [];
   imagen: any;
   fechaEnMiliseg: any;
-  fechaEnMilisegAnterior: any
+  fechaEnMilisegAnterior: any;
 
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
@@ -293,8 +293,6 @@ export class InicioComponent implements OnInit {
       this.createImageFromBlob(res);
     });
 
-  
-
     this.fechaEnMiliseg = Date.now();
     this.graficasInicioService.GetDataIse1().subscribe((res) => {
       if (res) {
@@ -340,7 +338,7 @@ export class InicioComponent implements OnInit {
             this.Highcharts.charts[1].hideLoading();
             //console.log('Data', this.data);
 
-            this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
+            /*this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
               if (res) {
                 let fechas = res.data.fechas;
                 let sensores = res.data.sensores;
@@ -360,18 +358,15 @@ export class InicioComponent implements OnInit {
                 this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3]);
                 this.Highcharts.charts[2].hideLoading();
                 //console.log('Data', this.data);
-                this.myTimer = setInterval(() => this.requestData(), 5000);
-                document.getElementById("btnParar").classList.remove('invisible');
-                document.getElementById("btnIniciar").classList.remove('invisible');
-                document.getElementById("btnParar").classList.add('visible');
-                document.getElementById("btnIniciar").classList.add('visible');
+                
               }
-            });
+            });*/
+            this.myTimer = setInterval(() => this.requestData(), 5000);
+            document.getElementById('btnParar').classList.remove('invisible');
+            document.getElementById('btnParar').classList.add('visible');
           }
-          
-        })
+        });
       }
-      
     });
   }
 
@@ -387,6 +382,8 @@ export class InicioComponent implements OnInit {
     console.log('enableInter');
     this.timerOn = true;
     this.myTimer = setInterval(() => this.requestData(), 5000);
+    document.getElementById('btnParar').classList.add('invisible');
+    document.getElementById('btnIniciar').classList.add('visible');
   }
 
   // clear setInterval
@@ -394,6 +391,8 @@ export class InicioComponent implements OnInit {
     this.timerOn = false;
     console.log('DisableInter');
     clearTimeout(this.myTimer);
+    document.getElementById('btnParar').classList.add('visible');
+    document.getElementById('btnIniciar').classList.add('invisible');
   }
 
   /**
@@ -402,7 +401,6 @@ export class InicioComponent implements OnInit {
   requestData() {
     this.fechaEnMilisegAnterior = this.fechaEnMiliseg;
     this.fechaEnMiliseg = Date.now();
-   
 
     //console.log(fechaEnMiliseg);
     //console.log(fechaEnMilisegAnterior);
@@ -415,8 +413,8 @@ export class InicioComponent implements OnInit {
           let fechas = res.data.fechas;
           let sensores = res.data.sensores;
 
-         // console.log('Fechas nuevas: ', fechas);
-         // console.log('Sensores nuevas: ', sensores);
+          // console.log('Fechas nuevas: ', fechas);
+          // console.log('Sensores nuevas: ', sensores);
 
           fechas.forEach((elemento, i) => {
             sensores.forEach((element, j) => {
@@ -426,7 +424,7 @@ export class InicioComponent implements OnInit {
               this.dataIse1[j].push([result, element.mediciones[i]]);
             });
           });
-      
+
           this.dataIse1[0].sort();
           this.dataIse1[1].sort();
           this.dataIse1[2].sort();
@@ -456,7 +454,7 @@ export class InicioComponent implements OnInit {
               this.dataIse2[j].push([result, element.mediciones[i]]);
             });
           });
-      
+
           this.dataIse2[0].sort();
           this.dataIse2[1].sort();
           this.dataIse2[2].sort();
@@ -469,7 +467,7 @@ export class InicioComponent implements OnInit {
         }
       });
 
-    this.graficasInicioService
+    /*this.graficasInicioService
       .GetDataE1ms1Fecha(this.fechaEnMilisegAnterior, this.fechaEnMiliseg)
       .subscribe((res) => {
         if (res) {
@@ -483,7 +481,7 @@ export class InicioComponent implements OnInit {
               this.dataE1ms1[j].push([result, element.mediciones[i]]);
             });
           });
-      
+
           this.dataE1ms1[0].sort();
           this.dataE1ms1[1].sort();
           this.dataE1ms1[2].sort();
@@ -495,6 +493,6 @@ export class InicioComponent implements OnInit {
           this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3], true);
           //console.log('Data', this.data);
         }
-      });
+      });*/
   }
 }
