@@ -10,8 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { ImageViewerModule } from 'ng2-image-viewer';
+
 
 @NgModule({
   declarations: [
@@ -28,13 +27,7 @@ import { ImageViewerModule } from 'ng2-image-viewer';
     MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    BrowserModule,
-    // Especificar libería para importar
-    ImageViewerModule
-  ],
-  providers: [],
-  bootstrap: [EspectrogramaComponent],
-
+    HttpClientModule
+  ]
 })
 export class EspectrogramaModule { }
