@@ -12,9 +12,7 @@ import { DateSelectionModelChange, MatDatepickerInput } from '@angular/material/
   styleUrls: ['./espectrograma.component.css']
 })
 export class EspectrogramaComponent implements OnInit {
-
-  imagen: any;
-
+  images: string[] = ['http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png','http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png'];
   selectedEstacion: string = 'ise1';
   selectedSensor: string = "1";
   selectedDateTime_i: Date;
@@ -82,7 +80,7 @@ export class EspectrogramaComponent implements OnInit {
 createImageFromBlob(image: Blob) {
        let reader = new FileReader();
        reader.addEventListener("load", () => {
-          this.imagen = reader.result;
+          this.images = ['http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png','http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png'];
        }, false);
 
        if (image) {
