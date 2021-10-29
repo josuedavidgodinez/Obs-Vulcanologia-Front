@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { formatDate } from '@angular/common';
 
 @Injectable({
@@ -13,14 +13,20 @@ export class EspectogramaService {
   constructor(private httpClient: HttpClient) { }
 
   GetData(formulario: any): Observable<any> {
-    return this.httpClient.get(`${environment.server}/media/ise1/1/espectrograma`, { responseType: 'blob' }).pipe(catchError(this.clientError));
+    return this.httpClient.get(`${environment.server}/media/eg/ise1/1`, { responseType: 'blob' }).pipe(catchError(this.clientError));
   }
 
   GetDataFecha(estacion:any,sensor:any,fecha_i:any,fecha_f:any): Observable<any> {
     fecha_i = this.ParsingDate(fecha_i);
     fecha_f = this.ParsingDate(fecha_f);
-    console.log(`${environment.server}/media/`+estacion+`/`+sensor+`/espectrograma?fhi=`+fecha_i+`&fhf=`+fecha_f);
-    return this.httpClient.get(`${environment.server}/media/`+estacion+`/`+sensor+`/espectrograma?fhi=`+fecha_i+`&fhf=`+fecha_f, { responseType: 'blob' }).pipe(catchError(this.clientError));
+    console.log(`${environment.server}/eg/`+estacion+`/`+sensor+`?fhi=`+fecha_i+`&fhf=`+fecha_f);
+    return this.httpClient.get(`${environment.server}/media/eg/`+estacion+`/`+sensor+`?fhi=`+fecha_i+`&fhf=`+fecha_f, { responseType: 'blob' }).pipe(catchError(this.clientError));
+  }
+
+  GetImage(image:any){
+
+    return this.httpClient.get(`${environment.server}/media/graphs/`+image, { responseType: 'blob' }).pipe(catchError(this.clientError));
+
   }
 
   ParsingDate(fecha:Date){

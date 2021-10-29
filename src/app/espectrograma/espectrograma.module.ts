@@ -10,7 +10,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ImageViewerModule } from '@hallysonh/ngx-imageviewer';
+import { GalleryModule } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -24,10 +27,18 @@ import { HttpClientModule } from '@angular/common/http';
     MatDatepickerModule,
     MatInputModule,
     MatButtonModule,
+    MatToolbarModule,
     MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ImageViewerModule,
+    GalleryModule,
+    LightboxModule
+  ],
+  exports: [
+    MatButtonModule,
+    MatToolbarModule,
   ]
 })
 export class EspectrogramaModule { }
