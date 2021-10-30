@@ -12,6 +12,7 @@ import {
   ImageSize
 } from "ng-gallery";
 import { Lightbox } from 'ng-gallery/lightbox';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-espectrograma',
@@ -34,7 +35,7 @@ export class EspectrogramaComponent implements OnInit {
     this.selectedEstacion = event.target.value;
     if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.EspectogramaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-        console.log(res)
+        this.llenarDatos(res);
       })
     }
   }
@@ -44,7 +45,7 @@ export class EspectrogramaComponent implements OnInit {
     this.selectedSensor = event.target.value;
     if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.EspectogramaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-        console.log(res)
+        this.llenarDatos(res);
       })
     }
   }
@@ -54,7 +55,7 @@ export class EspectrogramaComponent implements OnInit {
     this.selectedDateTime_i = event;
     if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.EspectogramaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-        console.log(res)
+        this.llenarDatos(res);
       })
     }
   }
@@ -64,7 +65,7 @@ export class EspectrogramaComponent implements OnInit {
     this.selectedDateTime_f = event;
     if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.EspectogramaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-        console.log(res)
+        this.llenarDatos(res);
       })
     }
   }
@@ -78,6 +79,23 @@ export class EspectrogramaComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.EspectogramaService.GetData(true).subscribe(res => {
+      this.llenarDatos(res);
+    })
+  }
+
+  llenarDatos(imagen:any){
+    for (let i = 0; i < 10; i++) {
+
+      this.imageData.push(
+        {
+        srcUrl: `${environment.imagenes}`+imagen.list[i].imgName,
+        previewUrl: `${environment.imagenes}`+imagen.list[i].imgName
+        }
+
+      );
+    }
+
     this.items = this.imageData.map(item => {
       return {
         type: "imageViewer",
@@ -87,27 +105,11 @@ export class EspectrogramaComponent implements OnInit {
         }
       };
     });
+
   }
 }
 
-const data = [
-  {
-    srcUrl: "http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png",
-    previewUrl: "http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png"
-  },
-  {
-    srcUrl: "http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png",
-    previewUrl: "http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png"
-  },
-  {
-    srcUrl: "http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png",
-    previewUrl: "http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png"
-  },
-  {
-    srcUrl: "http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png",
-    previewUrl: "http://ec2-54-162-123-190.compute-1.amazonaws.com:3300/media/graphs/ieg20211026143049_20211027033049_ise1_1.png"
-  }
-];
+ let data = [];
 
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {

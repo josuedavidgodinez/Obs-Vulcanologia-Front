@@ -13,7 +13,7 @@ export class EspectogramaService {
   constructor(private httpClient: HttpClient) { }
 
   GetData(formulario: any): Observable<any> {
-    return this.httpClient.get(`${environment.server}/media/eg/ise1/1`, { responseType: 'blob' }).pipe(catchError(this.clientError));
+    return this.httpClient.get(`${environment.server}/media/eg/ise1/1`, { responseType: 'json' }).pipe(catchError(this.clientError));
   }
 
   GetDataFecha(estacion:any,sensor:any,fecha_i:any,fecha_f:any): Observable<any> {
