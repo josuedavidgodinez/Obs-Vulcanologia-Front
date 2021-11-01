@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row my-4">
+    <div class="col">
+      <div class="jumbotron">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div [formGroup]="formGroup">
+              <mat-form-field>
+                <input matInput [ngxMatDatetimePicker]="datepicker" placeholder="Seleccionar fecha y hora" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #datepicker></ngx-mat-datetime-picker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
