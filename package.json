@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "prod-build-dev": " ng build --prod  --build-optimizer"
   },
   "private": true,
   "dependencies": {
@@ -21,8 +22,14 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@emazv72/ngx-imageviewer": "^2.3.0",
+    "@hallysonh/ngx-imageviewer": "^2.0.4",
     "highcharts": "^9.1.2",
     "highcharts-angular": "^2.10.0",
+    "iv-viewer": "^2.0.1",
+    "ng-gallery": "^5.0.0",
+    "ng-picture-viewer": "0.0.4",
+    "ng2-image-viewer": "^3.0.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
