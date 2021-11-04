@@ -12,55 +12,33 @@ import { DateSelectionModelChange, MatDatepickerInput } from '@angular/material/
   styleUrls: ['./grafica-diaria.component.css']
 })
 export class GraficaDiariaComponent implements OnInit {
-
   imagen: any;
-
+  imgUrl: string;
   selectedEstacion: string = 'ise1';
   selectedSensor: string = "1";
-  selectedDateTime_i: Date;
   selectedDateTime_f: Date;
 
   selectChangeHandler1 (event: any) {
     //update the ui
     this.selectedEstacion = event.target.value;
-    if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
-      this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-        this.createImageFromBlob(res);
-        console.log(res)
-      })
+    if(typeof this.selectedDateTime_f !== 'undefined'){
+      this.imgUrl = this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_f);
     }
   }
 
   selectChangeHandler2 (event: any) {
     //update the ui
     this.selectedSensor = event.target.value;
-    if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
-      this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-        this.createImageFromBlob(res);
-        console.log(res)
-      })
-    }
-  }
-
-  selectChangeHandler3 (event: any) {
-    //update the ui
-    this.selectedDateTime_i = event;
-    if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
-      this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-        this.createImageFromBlob(res);
-        console.log(res)
-      })
+    if(typeof this.selectedDateTime_f !== 'undefined'){
+      this.imgUrl = this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_f);
     }
   }
 
    selectChangeHandler4 (event: any) {
     //update the ui
     this.selectedDateTime_f = event;
-    if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
-      this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
-        this.createImageFromBlob(res);
-        console.log(res)
-      })
+    if(typeof this.selectedDateTime_f !== 'undefined'){
+      this.imgUrl = this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_f);
     }
   }
 
@@ -72,9 +50,10 @@ export class GraficaDiariaComponent implements OnInit {
   constructor(private graficaDiariaService: GraficaDiariaService) { }
 
   ngOnInit(): void {
-    this.graficaDiariaService.GetData(true).subscribe(res => {
-      this.createImageFromBlob(res);
-    })
+    const date = new Date();
+    const ms = 1000*60*60*24;
+    const nd = new Date(date.valueOf() - ms);
+    this.imgUrl = this.graficaDiariaService.GetDataFecha('ise1','1',nd);
   }
 
 
