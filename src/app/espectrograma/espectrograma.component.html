@@ -7,15 +7,13 @@
             <div [formGroup]="formGroup">
               <div class="row">
                 <select (change)="selectChangeHandler1($event)">
-                  <option selected>Seleccionar Estación</option>
-                  <option value="ise1">Estación 1</option>
-                  <option value="ise2">Estación 2</option>
-                  <option value="e1ms1">Estación 3</option>
+                  <option selected value="ise1">ISE1</option>
+                  <option value="ise2">ISE2</option>
+                  <option value="e1ms1">E1MS1</option>
                 </select>
                 <span style="padding-left:20px"></span>
                 <select (change)="selectChangeHandler2($event)">
-                  <option selected>Seleccionar Sensor</option>
-                  <option value="1">Sensor 1</option>
+                  <option selected value="1">Sensor 1</option>
                   <option value="2">Sensor 2</option>
                   <option value="3">Sensor 3</option>
                 </select>
@@ -40,9 +38,33 @@
       </div>
     </div>
   </div>
-  <div class="row my-5">
+  <div class="row">
     <div class="col">
-        <gallery id="basic-test" fluid [items]="items" [itemTemplate]="itemTemplate" [gestures]="false"></gallery>
+      <dl class="dl-horizontal">
+        <dt>
+          Fecha de Inicio
+        </dt>
+        <dd>
+          {{dataInShow.fi}}
+        </dd>
+        <dt>
+          Fecha de Fin
+        </dt>
+        <dd>
+          {{dataInShow.ff}}
+        </dd>
+      </dl>
+      <a class="btn btn-primary" (click)="openInTab(dataInShow.link)">Abrir Imagen</a>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col">
+        <gallery id="basic-test" fluid 
+        class="galStyl"
+        [items]="items"
+        [itemTemplate]="itemTemplate" 
+        [gestures]="false"
+        ></gallery>
     </div>
     <ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
       <ng-container *ngIf="type === 'imageViewer' && index === currIndex">
