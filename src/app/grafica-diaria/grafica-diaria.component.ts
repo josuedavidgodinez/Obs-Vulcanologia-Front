@@ -26,7 +26,7 @@ export class GraficaDiariaComponent implements OnInit {
     if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
         this.createImageFromBlob(res);
-        console.log(res)
+        //console.log(res)
       })
     }
   }
@@ -37,7 +37,7 @@ export class GraficaDiariaComponent implements OnInit {
     if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
         this.createImageFromBlob(res);
-        console.log(res)
+        //console.log(res)
       })
     }
   }
@@ -48,7 +48,7 @@ export class GraficaDiariaComponent implements OnInit {
     if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
         this.createImageFromBlob(res);
-        console.log(res)
+        //console.log(res)
       })
     }
   }
@@ -59,7 +59,7 @@ export class GraficaDiariaComponent implements OnInit {
     if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
         this.createImageFromBlob(res);
-        console.log(res)
+        //console.log(res)
       })
     }
   }

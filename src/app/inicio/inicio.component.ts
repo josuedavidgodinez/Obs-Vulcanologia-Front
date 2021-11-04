@@ -13,7 +13,8 @@ export class InicioComponent implements OnInit {
   dataIse2 = [[], [], [], []];
   dataE1ms1 = [[], [], [], []];
   myTimer: any;
-  timerOn = true;
+  timerOn = false;
+  yaEmpezo = false;
   fechas = [];
   imagen: any;
   fechaEnMiliseg: any;
@@ -296,7 +297,7 @@ export class InicioComponent implements OnInit {
     this.fechaEnMiliseg = Date.now();
     this.graficasInicioService.GetDataIse1().subscribe((res) => {
       if (res) {
-        console.log(res);
+        //console.log(res);
         let fechas = res.data.fechas;
         let sensores = res.data.sensores;
         fechas.forEach((elemento, i) => {
@@ -307,8 +308,8 @@ export class InicioComponent implements OnInit {
             this.dataIse1[j].push([result, element.mediciones[i]]);
           });
         });
-        console.log('Data', this.dataIse1);
-        console.log(this.Highcharts.charts);
+        //console.log('Data', this.dataIse1);
+        //console.log(this.Highcharts.charts);
         this.Highcharts.charts[0].series[0].setData(this.dataIse1[0]);
         this.Highcharts.charts[0].series[1].setData(this.dataIse1[1]);
         this.Highcharts.charts[0].series[2].setData(this.dataIse1[2]);
@@ -318,7 +319,7 @@ export class InicioComponent implements OnInit {
 
         this.graficasInicioService.GetDataIse2().subscribe((res) => {
           if (res) {
-            console.log(res);
+            //console.log(res);
             let fechas = res.data.fechas;
             let sensores = res.data.sensores;
             fechas.forEach((elemento, i) => {
@@ -330,7 +331,7 @@ export class InicioComponent implements OnInit {
             });
             //console.log('Data', this.data);
 
-            console.log(this.Highcharts.charts);
+            //console.log(this.Highcharts.charts);
             this.Highcharts.charts[1].series[0].setData(this.dataIse2[0]);
             this.Highcharts.charts[1].series[1].setData(this.dataIse2[1]);
             this.Highcharts.charts[1].series[2].setData(this.dataIse2[2]);
@@ -349,8 +350,8 @@ export class InicioComponent implements OnInit {
                     this.dataE1ms1[j].push([result, element.mediciones[i]]);
                   });
                 });
-                console.log('Data', this.dataE1ms1);
-                console.log(this.Highcharts.charts);
+                //console.log('Data', this.dataE1ms1);
+                //console.log(this.Highcharts.charts);
 
                 this.Highcharts.charts[2].series[0].setData(this.dataE1ms1[0]);
                 this.Highcharts.charts[2].series[1].setData(this.dataE1ms1[1]);
@@ -359,11 +360,10 @@ export class InicioComponent implements OnInit {
                 this.Highcharts.charts[2].hideLoading();
                 //console.log('Data', this.data);
                 this.myTimer = setInterval(() => this.requestData(), 5000);
-                document.getElementById('btnParar').classList.remove('invisible');
-                document.getElementById('btnParar').classList.add('visible');
+                this.timerOn = true;
+                this.yaEmpezo = true;
               }
             });
-           
           }
         });
       }
@@ -379,20 +379,16 @@ export class InicioComponent implements OnInit {
   }
 
   enableInter() {
-    console.log('enableInter');
+    //console.log('enableInter');
     this.timerOn = true;
     this.myTimer = setInterval(() => this.requestData(), 5000);
-    document.getElementById('btnParar').classList.add('invisible');
-    document.getElementById('btnIniciar').classList.add('visible');
   }
 
   // clear setInterval
   disabledInter() {
     this.timerOn = false;
-    console.log('DisableInter');
+    //console.log('DisableInter');
     clearTimeout(this.myTimer);
-    document.getElementById('btnParar').classList.add('visible');
-    document.getElementById('btnIniciar').classList.add('invisible');
   }
 
   /**
