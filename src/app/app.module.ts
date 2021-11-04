@@ -10,12 +10,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { BarraMenuComponent } from './barra-menu/barra-menu.component';
+import { BlackFooterComponent } from './black-footer/black-footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BarraMenuComponent,
+    BlackFooterComponent,
   ],
   imports: [
     AppRoutingModule,
