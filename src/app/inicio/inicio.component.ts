@@ -338,7 +338,7 @@ export class InicioComponent implements OnInit {
             this.Highcharts.charts[1].hideLoading();
             //console.log('Data', this.data);
 
-            /*this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
+            this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
               if (res) {
                 let fechas = res.data.fechas;
                 let sensores = res.data.sensores;
@@ -358,12 +358,12 @@ export class InicioComponent implements OnInit {
                 this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3]);
                 this.Highcharts.charts[2].hideLoading();
                 //console.log('Data', this.data);
-                
+                this.myTimer = setInterval(() => this.requestData(), 5000);
+                document.getElementById('btnParar').classList.remove('invisible');
+                document.getElementById('btnParar').classList.add('visible');
               }
-            });*/
-            this.myTimer = setInterval(() => this.requestData(), 5000);
-            document.getElementById('btnParar').classList.remove('invisible');
-            document.getElementById('btnParar').classList.add('visible');
+            });
+           
           }
         });
       }
@@ -467,7 +467,7 @@ export class InicioComponent implements OnInit {
         }
       });
 
-    /*this.graficasInicioService
+    this.graficasInicioService
       .GetDataE1ms1Fecha(this.fechaEnMilisegAnterior, this.fechaEnMiliseg)
       .subscribe((res) => {
         if (res) {
@@ -493,6 +493,6 @@ export class InicioComponent implements OnInit {
           this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3], true);
           //console.log('Data', this.data);
         }
-      });*/
+      });
   }
 }
