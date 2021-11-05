@@ -4,7 +4,7 @@
       <div class="border border-dark rounded bg-light">
         <div [formGroup]="formGroup">
           <div class="form-row">
-            <div class="col-2 my-4">
+            <div class="col-2 mt-4">
               <div class="form-group">
                 <label class="mx-1" for="estacion">Estación</label>
                 <select class="mx-1" id="estacion" (change)="selectChangeHandler1($event)">
@@ -14,7 +14,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-2 my-4">
+            <div class="col-2 mt-4">
               <div class="form-group">
                 <label class="mx-1" for="sensor">Sensor</label>
                 <select class="mx-1" id="sensor" (change)="selectChangeHandler2($event)">
@@ -24,10 +24,10 @@
                 </select>
               </div>
             </div>
-            <div class="col my-2">
+            <div class="col-4 mt-2">
                 <div class="form-group">
-                  <label class="mx-2">Fecha y Hora</label>
                   <mat-form-field>
+                    <mat-label class="text-dark"><strong>Fecha y Hora</strong></mat-label>
                     <input matInput [ngxMatDatetimePicker]="datepicker2" placeholder="Seleccionar Fecha y Hora"
                       formControlName="date_fin" (ngModelChange)="selectChangeHandler4($event)">
                     <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
