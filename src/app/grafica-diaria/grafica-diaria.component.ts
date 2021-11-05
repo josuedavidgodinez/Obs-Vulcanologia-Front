@@ -1,5 +1,6 @@
 import { GraficaDiariaService } from './../services/GraficaDiaria/grafica-diaria.service';
 import { NgxMatDateAdapter, NgxMatDateFormats, NGX_MAT_DATE_FORMATS } from '@angular-material-components/datetime-picker';
+import {MatSelectModule} from '@angular/material/select';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -12,14 +13,28 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 export class GraficaDiariaComponent implements OnInit {
   imagen: any;
   imgUrl: string;
+  imgUrlDate: string;
   selectedEstacion: string = 'ise1';
   selectedSensor: string = "1";
   selectedDateTime_f: Date;
+
+  imgErr () {
+    this.imgUrl = "./assets/images/imagenBlanca.png";
+    this.imgUrlDate = "Imagen No encontrada";
+  }
+  imgGood () {
+    if(this.imgUrl == "./assets/images/imagenBlanca.png"){
+      this.imgUrlDate = "Imagen No encontrada";
+    }else{
+      this.imgUrlDate = this.selectedDateTime_f.toString();  
+    }
+  }
 
   selectChangeHandler1 (event: any) {
     //update the ui
     this.selectedEstacion = event.target.value;
     if(typeof this.selectedDateTime_f !== 'undefined'){
+      this.imgUrlDate = "Buscando Imagen";
       this.imgUrl = this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_f);
     }
   }
@@ -28,6 +43,7 @@ export class GraficaDiariaComponent implements OnInit {
     //update the ui
     this.selectedSensor = event.target.value;
     if(typeof this.selectedDateTime_f !== 'undefined'){
+      this.imgUrlDate = "Buscando Imagen";
       this.imgUrl = this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_f);
     }
   }
@@ -36,6 +52,7 @@ export class GraficaDiariaComponent implements OnInit {
     //update the ui
     this.selectedDateTime_f = event;
     if(typeof this.selectedDateTime_f !== 'undefined'){
+      this.imgUrlDate = "Buscando Imagen";
       this.imgUrl = this.graficaDiariaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_f);
     }
   }
@@ -52,21 +69,8 @@ export class GraficaDiariaComponent implements OnInit {
     const ms = 1000*60*60*24;
     const nd = new Date(date.valueOf() - ms);
     this.imgUrl = this.graficaDiariaService.GetDataFecha('ise1','1',nd);
+    this.imgUrlDate = nd.toString();
   }
-
-
-
-createImageFromBlob(image: Blob) {
-       let reader = new FileReader();
-       reader.addEventListener("load", () => {
-          this.imagen = reader.result;
-       }, false);
-
-       if (image) {
-          reader.readAsDataURL(image);
-       }
-}
-
 }
 
 
