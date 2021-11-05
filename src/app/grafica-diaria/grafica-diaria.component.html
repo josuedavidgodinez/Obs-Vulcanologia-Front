@@ -1,30 +1,31 @@
 <div class="container">
   <div class="row my-4">
     <div class="col">
-      <div class="border border-dark rounded bg-light ">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <div [formGroup]="formGroup">
-              <div class="row">
-                <div class="col">
-                  <div class="form-group mx-1 mt-4">
-                    <label class="mx-1" for="estacion">Estación</label>
-                    <select class="mx-1" id="estacion" (change)="selectChangeHandler1($event)">
-                      <option selected value="ise1">ISE1</option>
-                      <option value="ise2">ISE2</option>
-                      <option value="e1ms1">E1MS1</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group mx-1 mt-4">
-                  <label class="mx-1" for="sensor">Sensor</label>
-                  <select class="mx-1" id="sensor" (change)="selectChangeHandler2($event)">
-                    <option selected value="1">Sensor 1</option>
-                    <option value="2">Sensor 2</option>
-                    <option value="3">Sensor 3</option>
-                  </select>
-                </div>
-                <div class="form-group mx-2 mt-2">
+      <div class="border border-dark rounded bg-light">
+        <div [formGroup]="formGroup">
+          <div class="form-row">
+            <div class="col-2 my-4">
+              <div class="form-group">
+                <label class="mx-1" for="estacion">Estación</label>
+                <select class="mx-1" id="estacion" (change)="selectChangeHandler1($event)">
+                  <option selected value="ise1">ISE1</option>
+                  <option value="ise2">ISE2</option>
+                  <option value="e1ms1">E1MS1</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2 my-4">
+              <div class="form-group">
+                <label class="mx-1" for="sensor">Sensor</label>
+                <select class="mx-1" id="sensor" (change)="selectChangeHandler2($event)">
+                  <option selected value="1">Sensor 1</option>
+                  <option value="2">Sensor 2</option>
+                  <option value="3">Sensor 3</option>
+                </select>
+              </div>
+            </div>
+            <div class="col my-2">
+                <div class="form-group">
                   <label class="mx-2">Fecha y Hora</label>
                   <mat-form-field>
                     <input matInput [ngxMatDatetimePicker]="datepicker2" placeholder="Seleccionar Fecha y Hora"
@@ -34,7 +35,6 @@
                   </mat-form-field>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
