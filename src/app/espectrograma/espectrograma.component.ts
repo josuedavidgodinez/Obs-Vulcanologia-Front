@@ -32,6 +32,10 @@ export class EspectrogramaComponent implements OnInit {
   items: GalleryItem[];
   @ViewChild("itemTemplate", { static: true }) itemTemplate: TemplateRef<any>;
 
+  /**
+   * 
+   * @param event 
+   */
   selectChangeHandler1 (event: any) {
     //update the ui
     this.selectedEstacion = event.target.value;
@@ -42,6 +46,10 @@ export class EspectrogramaComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   * @param event 
+   */
   selectChangeHandler2 (event: any) {
     //update the ui
     this.selectedSensor = event.target.value;
@@ -52,6 +60,10 @@ export class EspectrogramaComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   * @param event 
+   */
   selectChangeHandler3 (event: any) {
     //update the ui
     this.selectedDateTime_i = event;
@@ -62,6 +74,10 @@ export class EspectrogramaComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   * @param event 
+   */
   selectChangeHandler4 (event: any) {
     //update the ui
     this.selectedDateTime_f = event;
@@ -72,9 +88,18 @@ export class EspectrogramaComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   * @param link 
+   */
   openInTab (link: string): void {
     window.open(link, "_blank");
   }
+
+  /**
+   * 
+   * @param i 
+   */
   changeData (i: number) {
     const arr: any[] = this.imgsInfo;
     if(arr.length > 0){
@@ -112,6 +137,10 @@ export class EspectrogramaComponent implements OnInit {
     })
   }
 
+  /**
+   * 
+   * @param imagen 
+   */
   llenarDatos(imagen:any){
     this.imageData = [];
     this.imgsInfo = [];

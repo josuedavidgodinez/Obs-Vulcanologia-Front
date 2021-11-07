@@ -20,6 +20,9 @@ export class InicioComponent implements OnInit {
   fechaEnMiliseg: any;
   fechaEnMilisegAnterior: any;
 
+  /**
+   * Manda a traer la imagen de la página de inicio
+   */
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener(
@@ -35,6 +38,9 @@ export class InicioComponent implements OnInit {
     }
   }
 
+  /**
+   * Datos de configuración de chart ISE1
+   */
   chartOptionsEstacion1 = {
     plotOptions: {
       series: {
@@ -121,6 +127,9 @@ export class InicioComponent implements OnInit {
     },
   };
 
+  /**
+   * Datos de configuración de chart ISE2
+   */  
   chartOptionsEstacion2 = {
     plotOptions: {
       series: {
@@ -200,6 +209,9 @@ export class InicioComponent implements OnInit {
     },
   };
 
+  /**
+   * Datos de configuración de chart E1MS1
+   */
   chartOptionsEstacion3 = {
     plotOptions: {
       series: {
@@ -289,6 +301,9 @@ export class InicioComponent implements OnInit {
     delete this.Highcharts;
   }
 
+  /**
+   * ngOnInit donde se hace el request de la data inicial, y se inicializan los gráficos
+   */
   async ngOnInit() {
     this.graficasInicioService.GetImage(true).subscribe((res) => {
       this.createImageFromBlob(res);
@@ -370,6 +385,9 @@ export class InicioComponent implements OnInit {
     });
   }
 
+  /**
+   * Función de lógica para activar o desactivar funcion de request data
+   */
   toggleTimer() {
     if (this.timerOn) {
       this.disabledInter();
@@ -378,13 +396,18 @@ export class InicioComponent implements OnInit {
     }
   }
 
+  /**
+   * Función para habilitar la request de data
+   */
   enableInter() {
     //console.log('enableInter');
     this.timerOn = true;
     this.myTimer = setInterval(() => this.requestData(), 5000);
   }
 
-  // clear setInterval
+  /**
+   * Función para deshabilitar la request de data
+   */
   disabledInter() {
     this.timerOn = false;
     //console.log('DisableInter');
@@ -392,7 +415,7 @@ export class InicioComponent implements OnInit {
   }
 
   /**
-   * Request data from the server, add it to the graph and set a timeout to request again
+   * Función para traer la data del servidor, toma en cuenta la última traída de datos para solo traer la diferencia entre el ultimo valor y el mas nuevo.
    */
   requestData() {
     this.fechaEnMilisegAnterior = this.fechaEnMiliseg;
