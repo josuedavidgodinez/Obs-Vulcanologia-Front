@@ -17,8 +17,13 @@ export class InicioComponent implements OnInit {
   yaEmpezo = false;
   fechas = [];
   imagen: any;
+  imgUrl: string;
   fechaEnMiliseg: any;
   fechaEnMilisegAnterior: any;
+
+  imgErr() {
+    this.imgUrl = './assets/images/VolcanFuegoDefault.png';
+  }
 
   /**
    * Manda a traer la imagen de la página de inicio
@@ -305,8 +310,16 @@ export class InicioComponent implements OnInit {
    * ngOnInit donde se hace el request de la data inicial, y se inicializan los gráficos
    */
   async ngOnInit() {
-    this.graficasInicioService.GetImage(true).subscribe((res) => {
-      this.createImageFromBlob(res);
+    this.graficasInicioService.GetLastImage().subscribe((res) => {
+      if(res){
+        if(res.ImgUrl){
+          this.imgUrl = res.ImgUrl;
+        }else{
+          this.imgUrl = './assets/images/VolcanFuegoDefault.png';
+        }
+      }else{
+        this.imgUrl = './assets/images/VolcanFuegoDefault.png';
+      }
     });
 
     this.fechaEnMiliseg = Date.now();

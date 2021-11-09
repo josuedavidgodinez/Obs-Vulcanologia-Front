@@ -30,7 +30,12 @@
   </highcharts-chart>
   <div class="row y-4">
     <div class="col text-center">
-      <img class="img-fluid" [src]="imagen" />
+      <h3>Última Foto</h3>
+    </div>
+  </div>
+  <div class="row y-4">
+    <div class="col text-center">
+      <img class="img-fluid" src="{{imgUrl}}" (error)="imgErr()"/>
     </div>
   </div>
 </div>
