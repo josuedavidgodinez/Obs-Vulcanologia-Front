@@ -33,8 +33,8 @@ export class EspectrogramaComponent implements OnInit {
   @ViewChild("itemTemplate", { static: true }) itemTemplate: TemplateRef<any>;
 
   /**
-   * 
-   * @param event 
+   * Obtiene el estado de la estacion seleccionada
+   * @param event
    */
   selectChangeHandler1 (event: any) {
     //update the ui
@@ -47,8 +47,8 @@ export class EspectrogramaComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param event 
+   * Obtiene el estado de la estacion seleccionada
+   * @param event
    */
   selectChangeHandler2 (event: any) {
     //update the ui
@@ -61,8 +61,8 @@ export class EspectrogramaComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param event 
+   * Obtiene el estado de la estacion seleccionada
+   * @param event
    */
   selectChangeHandler3 (event: any) {
     //update the ui
@@ -75,8 +75,8 @@ export class EspectrogramaComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param event 
+   * Obtiene el estado de la estacion seleccionada
+   * @param event
    */
   selectChangeHandler4 (event: any) {
     //update the ui
@@ -89,16 +89,16 @@ export class EspectrogramaComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param link 
+   *
+   * @param link
    */
   openInTab (link: string): void {
     window.open(link, "_blank");
   }
 
   /**
-   * 
-   * @param i 
+   *
+   * @param i
    */
   changeData (i: number) {
     const arr: any[] = this.imgsInfo;
@@ -138,8 +138,8 @@ export class EspectrogramaComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param imagen 
+   * Carga las imagenes al componente de visualizacion
+   * @param imagen
    */
   llenarDatos(imagen:any){
     this.imageData = [];

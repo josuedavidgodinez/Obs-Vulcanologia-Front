@@ -35,7 +35,7 @@ export class GraficaDiariaComponent implements OnInit {
   }
 
   /**
-   *
+   * Obtiene el estado de la estacion seleccionada
    * @param event
    */
   selectChangeHandler1(event: any) {
@@ -52,7 +52,7 @@ export class GraficaDiariaComponent implements OnInit {
   }
 
   /**
-   *
+   * Obtiene el estado de la estacion seleccionada
    * @param event
    */
   selectChangeHandler2(event: any) {
@@ -69,7 +69,7 @@ export class GraficaDiariaComponent implements OnInit {
   }
 
   /**
-   *
+   * Obtiene el estado de la estacion seleccionada
    * @param event
    */
   selectChangeHandler4(event: any) {
