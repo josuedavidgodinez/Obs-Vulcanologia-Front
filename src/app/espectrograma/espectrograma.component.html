@@ -1,34 +1,45 @@
 <div class="container">
   <div class="row my-4">
     <div class="col">
-      <div class="jumbotron">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <div [formGroup]="formGroup">
-              <div class="row">
-                <select (change)="selectChangeHandler1($event)">
-                  <option selected>Seleccionar Estación</option>
-                  <option value="ise1">Estación 1</option>
-                  <option value="ise2">Estación 2</option>
-                  <option value="e1ms1">Estación 3</option>
+      <div class="border border-dark rounded bg-light">
+        <div [formGroup]="formGroup">
+          <div class="form-row">
+            <div class="col-2 mt-4">
+              <div class="form-group">
+                <label class="mx-1" for="estacion">Estación</label>
+                <select class="mx-1" id="estacion" (change)="selectChangeHandler1($event)">
+                  <option selected value="ise1">ISE1</option>
+                  <option value="ise2">ISE2</option>
+                  <option value="e1ms1">E1MS1</option>
                 </select>
-                <span style="padding-left:20px"></span>
-                <select (change)="selectChangeHandler2($event)">
-                  <option selected>Seleccionar Sensor</option>
-                  <option value="1">Sensor 1</option>
+              </div>
+            </div>
+            <div class="col-2 mt-4">
+              <div class="form-group">
+                <label class="mx-1" for="sensor">Sensor</label>
+                <select class="mx-1" id="sensor" (change)="selectChangeHandler2($event)">
+                  <option selected value="1">Sensor 1</option>
                   <option value="2">Sensor 2</option>
                   <option value="3">Sensor 3</option>
                 </select>
-                <span style="padding-left:20px"></span>
+              </div>
+            </div>
+            <div class="col-lg-3 col-4 mt-2">
+              <div class="form-group">
                 <mat-form-field>
-                  <input matInput [ngxMatDatetimePicker]="datepicker" placeholder="Seleccionar fecha inicio y hora"
-                    formControlName="date_inicio" (ngModelChange)="selectChangeHandler3($event)">
+                  <mat-label class="text-dark"><strong>Inicio</strong></mat-label>
+                  <input matInput [ngxMatDatetimePicker]="datepicker" placeholder="Seleccionar fecha y hora"
+                  formControlName="date_inicio" (ngModelChange)="selectChangeHandler3($event)">
                   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                   <ngx-mat-datetime-picker #datepicker></ngx-mat-datetime-picker>
                 </mat-form-field>
-                <span style="padding-left:20px"></span>
+              </div>
+            </div>
+            <div class="col-lg-3 col-4 mt-2">
+              <div class="form-group">
                 <mat-form-field>
-                  <input matInput [ngxMatDatetimePicker]="datepicker2" placeholder="Seleccionar fecha fin y hora"
+                  <mat-label class="text-dark"><strong>Fin</strong></mat-label>
+                  <input matInput [ngxMatDatetimePicker]="datepicker2" placeholder="Seleccionar fecha y hora fin"
                     formControlName="date_fin" (ngModelChange)="selectChangeHandler4($event)">
                   <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
                   <ngx-mat-datetime-picker #datepicker2></ngx-mat-datetime-picker>
@@ -40,9 +51,29 @@
       </div>
     </div>
   </div>
-  <div class="row my-5">
+  <div class="row">
     <div class="col">
-        <gallery id="basic-test" fluid [items]="items" [itemTemplate]="itemTemplate" [gestures]="false"></gallery>
+      <dl class="dl-horizontal">
+        <dt>
+          Fecha de Inicio
+        </dt>
+        <dd>
+          {{dataInShow.fi}}
+        </dd>
+        <dt>
+          Fecha de Fin
+        </dt>
+        <dd>
+          {{dataInShow.ff}}
+        </dd>
+      </dl>
+      <a class="btn btn-primary" (click)="openInTab(dataInShow.link)">Abrir Imagen</a>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col">
+        <gallery id="basic-test" class="galStyl" [items]="items" [itemTemplate]="itemTemplate" [gestures]="false"
+        ></gallery>
     </div>
     <ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
       <ng-container *ngIf="type === 'imageViewer' && index === currIndex">

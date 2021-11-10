@@ -18,6 +18,10 @@ export class DensidadEspectralComponent implements OnInit {
     })
   }
 
+  /**
+   * 
+   * @param image 
+   */
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {

@@ -24,12 +24,18 @@ export class EspectrogramaComponent implements OnInit {
   selectedSensor: string = "1";
   selectedDateTime_i: Date;
   selectedDateTime_f: Date;
+  selectedIndex = 0;
+  dataInShow = { fi: "", ff: "", link: "" }
+  imageData = [];
+  imgsInfo = [];
 
   items: GalleryItem[];
   @ViewChild("itemTemplate", { static: true }) itemTemplate: TemplateRef<any>;
 
-  imageData = data;
-
+  /**
+   * Obtiene el estado de la estacion seleccionada
+   * @param event
+   */
   selectChangeHandler1 (event: any) {
     //update the ui
     this.selectedEstacion = event.target.value;
@@ -40,6 +46,10 @@ export class EspectrogramaComponent implements OnInit {
     }
   }
 
+  /**
+   * Obtiene el estado de la estacion seleccionada
+   * @param event
+   */
   selectChangeHandler2 (event: any) {
     //update the ui
     this.selectedSensor = event.target.value;
@@ -50,6 +60,10 @@ export class EspectrogramaComponent implements OnInit {
     }
   }
 
+  /**
+   * Obtiene el estado de la estacion seleccionada
+   * @param event
+   */
   selectChangeHandler3 (event: any) {
     //update the ui
     this.selectedDateTime_i = event;
@@ -60,13 +74,44 @@ export class EspectrogramaComponent implements OnInit {
     }
   }
 
-   selectChangeHandler4 (event: any) {
+  /**
+   * Obtiene el estado de la estacion seleccionada
+   * @param event
+   */
+  selectChangeHandler4 (event: any) {
     //update the ui
     this.selectedDateTime_f = event;
     if((typeof this.selectedDateTime_i !== 'undefined' && typeof this.selectedDateTime_f !== 'undefined')){
       this.EspectogramaService.GetDataFecha(this.selectedEstacion,this.selectedSensor,this.selectedDateTime_i,this.selectedDateTime_f).subscribe(res => {
         this.llenarDatos(res);
       })
+    }
+  }
+
+  /**
+   *
+   * @param link
+   */
+  openInTab (link: string): void {
+    window.open(link, "_blank");
+  }
+
+  /**
+   *
+   * @param i
+   */
+  changeData (i: number) {
+    const arr: any[] = this.imgsInfo;
+    if(arr.length > 0){
+      this.selectedIndex = i;
+      const obj = arr[this.selectedIndex];
+      this.dataInShow.fi = new Date(obj.fechaInicial).toString();
+      this.dataInShow.ff = new Date(obj.fechaFinal).toString();
+      this.dataInShow.link = `${environment.imagenes}` + obj.imgName;
+    }else{
+      this.dataInShow.fi = "";
+      this.dataInShow.ff = "";
+      this.dataInShow.link = "";
     }
   }
 
@@ -78,24 +123,37 @@ export class EspectrogramaComponent implements OnInit {
   constructor(private EspectogramaService: EspectogramaService,public gallery: Gallery, public lightbox: Lightbox) { }
 
   ngOnInit(): void {
-
+    const galleryRef = this.gallery.ref('basic-test');
+    galleryRef.indexChanged.subscribe(gs => {
+      console.log(gs);
+      this.changeData(gs.currIndex);
+    });
+    galleryRef.itemsChanged.subscribe(gs => {
+      console.log(gs);
+      galleryRef.set(gs.currIndex);
+    });
     this.EspectogramaService.GetData(true).subscribe(res => {
       this.llenarDatos(res);
     })
   }
 
+  /**
+   * Carga las imagenes al componente de visualizacion
+   * @param imagen
+   */
   llenarDatos(imagen:any){
-    for (let i = 0; i < 10; i++) {
-
+    this.imageData = [];
+    this.imgsInfo = [];
+    if(Array.isArray(imagen.list)) this.imgsInfo = imagen.list;
+    for (let index = 0; index < this.imgsInfo.length; index++) {
+      const element = this.imgsInfo[index];
       this.imageData.push(
         {
-        srcUrl: `${environment.imagenes}`+imagen.list[i].imgName,
-        previewUrl: `${environment.imagenes}`+imagen.list[i].imgName
+          srcUrl: `${environment.imagenes}` + element.imgName,
+          previewUrl: `${environment.imagenes}` + element.imgName
         }
-
       );
     }
-
     this.items = this.imageData.map(item => {
       return {
         type: "imageViewer",
@@ -105,11 +163,9 @@ export class EspectrogramaComponent implements OnInit {
         }
       };
     });
-
+    this.changeData(this.selectedIndex);
   }
 }
-
- let data = [];
 
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {

@@ -1,0 +1,162 @@
+#footer {
+    background: transparent;
+    padding: 40px 0;
+    width: 100%;
+  }
+  #footer .widget {
+    background: none !important;
+    padding: 0;
+  }
+  #footer .widget p {
+    font-size: 14px;
+  }
+  #footer.light {
+    background: #f4f4f4;
+  }
+  #footer.light .widget > strong {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  #footer.dark {
+    background: #080808;
+  }
+  #footer.dark .widget {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  #footer.dark .widget > strong {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  #footer.dark .widget a {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  #footer.dark .widget a.active, #footer.dark .widget a:hover {
+    color: white;
+  }
+  #footer.dark .widget .slick-nav {
+    background: #080808;
+    color: rgba(255, 255, 255, 0.4);
+  }
+  #footer.dark .widget .slick-nav:hover {
+    color: white;
+  }
+  #footer.dark .widget [class^="tag-link"] {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+  }
+  #footer.dark .widget [class^="tag-link"]:hover {
+    border: 1px solid white;
+    background: white;
+    color: #080808;
+  }
+  #footer.dark .widget .post-title a {
+    color: white;
+  }
+  #footer.dark .widget .post-bottom-meta {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  #footer.dark .widget .post-bottom-meta svg {
+    fill: rgba(255, 255, 255, 0.6);
+  }
+  #footer.dark .widget.widget_search .s {
+    color: #fff;
+    border-color: #fff;
+  }
+  #footer.dark .widget.widget_search input[type="submit"] {
+    background-color: #fff;
+    height: 39px;
+  }
+  #footer.dark .widget.widget_socialcounter ul li a,
+  #footer.dark .widget.widget_socialcounter ul li a .fa {
+    background: rgba(255, 255, 255, 0.07);
+  }
+  #footer.dark .widget.widget_recent_comments ul li:after {
+    color: #fff;
+  }
+  #footer.dark .widget.widget_topreviews .style2 li {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  #footer.dark .widget.widget_topreviews .style2 li a {
+    color: #fff;
+  }
+  #footer.dark .widget.widget_topreviews .style1 li {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  #footer.dark .widget.widget_topreviews .style1 li a {
+    color: #fff;
+  }
+  #footer.dark .widget.widget_topreviews .style1 li .post-bottom-meta {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  #footer.dark .widget.widget_topreviews .style1 li .ave {
+    color: #fff;
+  }
+  #footer.dark .widget.widget_topreviews .style1 li:after {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  #subfooter {
+    width: 100%;
+  }
+  #subfooter .subfooter-menu-holder {
+    padding: 40px 0;
+  }
+  #subfooter .subfooter-menu-holder .logolink {
+    display: inline-block;
+    margin-bottom: 25px;
+  }
+  #subfooter .subfooter-menu-holder .logolink .logoimg {
+    max-height: 25px;
+  }
+  #subfooter.light {
+    background: #f4f4f4;
+  }
+  #subfooter.light .subfooter-menu-holder {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  #subfooter.light .footer-menu li a {
+    color: rgba(0, 0, 0, 0.8);
+  }
+  #subfooter.light .footer-menu li a:hover {
+    color: black;
+  }
+  #subfooter.light p {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  #subfooter.dark {
+    background: #080808;
+  }
+  #subfooter.dark .subfooter-menu-holder {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  #subfooter.dark .footer-menu li a {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  #subfooter.dark .footer-menu li a:hover {
+    color: white;
+  }
+  #subfooter.dark p {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  #subfooter .footer-menu {
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+  }
+  #subfooter .footer-menu ul {
+    margin: 0;
+  }
+  #subfooter .footer-menu li {
+    display: inline-block;
+    margin: 0 12px;
+  }
+  #subfooter .footer-menu li a {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  #subfooter p {
+    font-size: 10px;
+    font-weight: 600;
+    margin: 0;
+  }

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+/**
+ *  Se utiliza Lazy Loading para obtener un mejor redimiento.
+ */
 const routes: Routes = [
   { path: '', loadChildren: () => import('./inicio/inicio.module').then(m => m.InicioModule) },
   { path: 'grafica-diaria', loadChildren: () => import('./grafica-diaria/grafica-diaria.module').then(m => m.GraficaDiariaModule) },

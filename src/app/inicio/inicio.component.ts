@@ -13,12 +13,21 @@ export class InicioComponent implements OnInit {
   dataIse2 = [[], [], [], []];
   dataE1ms1 = [[], [], [], []];
   myTimer: any;
-  timerOn = true;
+  timerOn = false;
+  yaEmpezo = false;
   fechas = [];
   imagen: any;
+  imgUrl: string;
   fechaEnMiliseg: any;
   fechaEnMilisegAnterior: any;
 
+  imgErr() {
+    this.imgUrl = './assets/images/VolcanFuegoDefault.png';
+  }
+
+  /**
+   * Manda a traer la imagen de la página de inicio
+   */
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener(
@@ -34,6 +43,9 @@ export class InicioComponent implements OnInit {
     }
   }
 
+  /**
+   * Datos de configuración de chart ISE1
+   */
   chartOptionsEstacion1 = {
     plotOptions: {
       series: {
@@ -120,6 +132,9 @@ export class InicioComponent implements OnInit {
     },
   };
 
+  /**
+   * Datos de configuración de chart ISE2
+   */  
   chartOptionsEstacion2 = {
     plotOptions: {
       series: {
@@ -199,6 +214,9 @@ export class InicioComponent implements OnInit {
     },
   };
 
+  /**
+   * Datos de configuración de chart E1MS1
+   */
   chartOptionsEstacion3 = {
     plotOptions: {
       series: {
@@ -288,15 +306,26 @@ export class InicioComponent implements OnInit {
     delete this.Highcharts;
   }
 
+  /**
+   * ngOnInit donde se hace el request de la data inicial, y se inicializan los gráficos
+   */
   async ngOnInit() {
-    this.graficasInicioService.GetImage(true).subscribe((res) => {
-      this.createImageFromBlob(res);
+    this.graficasInicioService.GetLastImage().subscribe((res) => {
+      if(res){
+        if(res.ImgUrl){
+          this.imgUrl = res.ImgUrl;
+        }else{
+          this.imgUrl = './assets/images/VolcanFuegoDefault.png';
+        }
+      }else{
+        this.imgUrl = './assets/images/VolcanFuegoDefault.png';
+      }
     });
 
     this.fechaEnMiliseg = Date.now();
     this.graficasInicioService.GetDataIse1().subscribe((res) => {
       if (res) {
-        console.log(res);
+        //console.log(res);
         let fechas = res.data.fechas;
         let sensores = res.data.sensores;
         fechas.forEach((elemento, i) => {
@@ -307,8 +336,8 @@ export class InicioComponent implements OnInit {
             this.dataIse1[j].push([result, element.mediciones[i]]);
           });
         });
-        console.log('Data', this.dataIse1);
-        console.log(this.Highcharts.charts);
+        //console.log('Data', this.dataIse1);
+        //console.log(this.Highcharts.charts);
         this.Highcharts.charts[0].series[0].setData(this.dataIse1[0]);
         this.Highcharts.charts[0].series[1].setData(this.dataIse1[1]);
         this.Highcharts.charts[0].series[2].setData(this.dataIse1[2]);
@@ -318,7 +347,7 @@ export class InicioComponent implements OnInit {
 
         this.graficasInicioService.GetDataIse2().subscribe((res) => {
           if (res) {
-            console.log(res);
+            //console.log(res);
             let fechas = res.data.fechas;
             let sensores = res.data.sensores;
             fechas.forEach((elemento, i) => {
@@ -330,7 +359,7 @@ export class InicioComponent implements OnInit {
             });
             //console.log('Data', this.data);
 
-            console.log(this.Highcharts.charts);
+            //console.log(this.Highcharts.charts);
             this.Highcharts.charts[1].series[0].setData(this.dataIse2[0]);
             this.Highcharts.charts[1].series[1].setData(this.dataIse2[1]);
             this.Highcharts.charts[1].series[2].setData(this.dataIse2[2]);
@@ -338,7 +367,7 @@ export class InicioComponent implements OnInit {
             this.Highcharts.charts[1].hideLoading();
             //console.log('Data', this.data);
 
-            /*this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
+            this.graficasInicioService.GetDataE1ms1().subscribe((res) => {
               if (res) {
                 let fechas = res.data.fechas;
                 let sensores = res.data.sensores;
@@ -349,8 +378,8 @@ export class InicioComponent implements OnInit {
                     this.dataE1ms1[j].push([result, element.mediciones[i]]);
                   });
                 });
-                console.log('Data', this.dataE1ms1);
-                console.log(this.Highcharts.charts);
+                //console.log('Data', this.dataE1ms1);
+                //console.log(this.Highcharts.charts);
 
                 this.Highcharts.charts[2].series[0].setData(this.dataE1ms1[0]);
                 this.Highcharts.charts[2].series[1].setData(this.dataE1ms1[1]);
@@ -358,18 +387,20 @@ export class InicioComponent implements OnInit {
                 this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3]);
                 this.Highcharts.charts[2].hideLoading();
                 //console.log('Data', this.data);
-                
+                this.myTimer = setInterval(() => this.requestData(), 5000);
+                this.timerOn = true;
+                this.yaEmpezo = true;
               }
-            });*/
-            this.myTimer = setInterval(() => this.requestData(), 5000);
-            document.getElementById('btnParar').classList.remove('invisible');
-            document.getElementById('btnParar').classList.add('visible');
+            });
           }
         });
       }
     });
   }
 
+  /**
+   * Función de lógica para activar o desactivar funcion de request data
+   */
   toggleTimer() {
     if (this.timerOn) {
       this.disabledInter();
@@ -378,25 +409,26 @@ export class InicioComponent implements OnInit {
     }
   }
 
+  /**
+   * Función para habilitar la request de data
+   */
   enableInter() {
-    console.log('enableInter');
+    //console.log('enableInter');
     this.timerOn = true;
     this.myTimer = setInterval(() => this.requestData(), 5000);
-    document.getElementById('btnParar').classList.add('invisible');
-    document.getElementById('btnIniciar').classList.add('visible');
-  }
-
-  // clear setInterval
-  disabledInter() {
-    this.timerOn = false;
-    console.log('DisableInter');
-    clearTimeout(this.myTimer);
-    document.getElementById('btnParar').classList.add('visible');
-    document.getElementById('btnIniciar').classList.add('invisible');
   }
 
   /**
-   * Request data from the server, add it to the graph and set a timeout to request again
+   * Función para deshabilitar la request de data
+   */
+  disabledInter() {
+    this.timerOn = false;
+    //console.log('DisableInter');
+    clearTimeout(this.myTimer);
+  }
+
+  /**
+   * Función para traer la data del servidor, toma en cuenta la última traída de datos para solo traer la diferencia entre el ultimo valor y el mas nuevo.
    */
   requestData() {
     this.fechaEnMilisegAnterior = this.fechaEnMiliseg;
@@ -467,7 +499,7 @@ export class InicioComponent implements OnInit {
         }
       });
 
-    /*this.graficasInicioService
+    this.graficasInicioService
       .GetDataE1ms1Fecha(this.fechaEnMilisegAnterior, this.fechaEnMiliseg)
       .subscribe((res) => {
         if (res) {
@@ -493,6 +525,6 @@ export class InicioComponent implements OnInit {
           this.Highcharts.charts[2].series[3].setData(this.dataE1ms1[3], true);
           //console.log('Data', this.data);
         }
-      });*/
+      });
   }
 }

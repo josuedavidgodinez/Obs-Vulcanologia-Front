@@ -1,7 +1,10 @@
 <div class="content">
   <br>
-  <button id="btnParar" type="button" class="btn btn-danger invisible" *ngIf="timerOn; else elseBlock" (click)="toggleTimer()">Parar</button>
-  <ng-template #elseBlock><button id="btnIniciar" type="button" class="btn btn-success invisible" (click)="toggleTimer()">Iniciar</button></ng-template>
+  <div *ngIf="yaEmpezo == true; else else2">
+    <button id="btnParar" type="button" class="btn btn-danger" *ngIf="timerOn == true; else elseBlock" (click)="toggleTimer()">Parar</button>
+    <ng-template #elseBlock><button id="btnIniciar" type="button" class="btn btn-success" (click)="toggleTimer()">Iniciar</button></ng-template>
+  </div>
+  <ng-template #else2></ng-template>
   <highcharts-chart
     style="width: 100%; display: block"
     [Highcharts]="Highcharts"
@@ -25,9 +28,14 @@
     [options]="chartOptionsEstacion3"
   >
   </highcharts-chart>
-  <div class="row my-4">
-    <div class="col">
-      <img [src]="imagen" />
+  <div class="row y-4">
+    <div class="col text-center">
+      <h3>Última Foto</h3>
+    </div>
+  </div>
+  <div class="row y-4">
+    <div class="col text-center">
+      <img class="img-fluid" src="{{imgUrl}}" (error)="imgErr()"/>
     </div>
   </div>
 </div>

@@ -15,6 +15,10 @@ export class GraficasInicioService {
     return this.httpClient.get(`${environment.server}/media/lastPhoto`, { responseType: 'blob' }).pipe(catchError(this.clientError));
   }
 
+  GetLastImage(): Observable<any> {
+    return this.httpClient.get(`${environment.server}/media/lastPhoto`).pipe(catchError(this.clientError));
+  }
+
   GetDataIse1(): Observable<any> {
     return this.httpClient.get(`${environment.server}/med/ise1/LecturaInicio`).pipe(catchError(this.clientError));
   }
