@@ -97,7 +97,7 @@ export class EspectrogramaComponent implements OnInit {
   }
 
   /**
-   *
+   * Coloca la imagen seleccionada en el espectrograma del Gallery view
    * @param i
    */
   changeData (i: number) {
